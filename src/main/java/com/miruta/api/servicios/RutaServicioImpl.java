@@ -7,7 +7,9 @@ import com.miruta.api.interfaces.InUsuarioHasRutaDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -33,8 +35,19 @@ public class RutaServicioImpl implements InRutaServicio{
 
     //Metodo listar rutas favoritas para un usuario con su correo
     @Override
-    public List<Ruta> listarRutasFavoritas() {
-        return null;
+    public List<Ruta> listarRutasFavoritas(String correoUsuario) {
+        List<Long> listaIdRuta = new ArrayList<>();
+
+        for (UsuarioHasRuta usuHasRuta: usuarioHasRutaDao.findAll()) {
+            if (usuHasRuta.getUsuarios().getCorreoUsu().equals(correoUsuario)) {
+                listaIdRuta.add(usuHasRuta.getRutas().getIdRut());
+            }
+        }
+
+        System.out.println(listaIdRuta);
+        List<Ruta> rutas = rutaDao.findAllById(listaIdRuta);
+
+        return rutas;
     }
 
 }

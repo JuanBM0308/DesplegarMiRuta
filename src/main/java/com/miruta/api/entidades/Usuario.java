@@ -1,6 +1,7 @@
 package com.miruta.api.entidades;
 
 import jakarta.persistence.*;
+import org.hibernate.Length;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -26,6 +27,9 @@ public class Usuario implements Serializable {
     @Column(length = 45, nullable = false)
     private String fotoUsu;
 
+    @Column(length = 2, nullable = false)
+    private Integer tipoUsuario;
+
 
 
     //Relaciones
@@ -33,16 +37,18 @@ public class Usuario implements Serializable {
     private Set<UsuarioHasRuta> usuarioHasRuta;
 
 
+
     //Constructores
     public Usuario() {
     }
 
-    public Usuario(Long idUsu, String correoUsu, String contraseniaUsu, String nombreUsu, String fotoUsu) {
+    public Usuario(Long idUsu, String correoUsu, String contraseniaUsu, String nombreUsu, String fotoUsu, Integer tipoUsuario) {
         this.idUsu = idUsu;
         this.correoUsu = correoUsu;
         this.contraseniaUsu = contraseniaUsu;
         this.nombreUsu = nombreUsu;
         this.fotoUsu = fotoUsu;
+        this.tipoUsuario = tipoUsuario;
     }
 
 
@@ -66,6 +72,10 @@ public class Usuario implements Serializable {
 
     public String getFotoUsu() {
         return fotoUsu;
+    }
+
+    public Integer getTipoUsuario() {
+        return tipoUsuario;
     }
 
     public Set<UsuarioHasRuta> getUsuarioHasRuta() {
@@ -95,6 +105,10 @@ public class Usuario implements Serializable {
         this.fotoUsu = fotoUsu;
     }
 
+    public void setTipoUsuario(Integer tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public void setUsuarioHasRuta(Set<UsuarioHasRuta> usuarioHasRuta) {
         this.usuarioHasRuta = usuarioHasRuta;
     }
@@ -110,6 +124,7 @@ public class Usuario implements Serializable {
                 ", contraseniaUsu='" + contraseniaUsu + '\'' +
                 ", nombreUsu='" + nombreUsu + '\'' +
                 ", fotoUsu='" + fotoUsu + '\'' +
+                ", tipoUsuario=" + tipoUsuario +
                 '}';
     }
 }

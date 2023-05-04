@@ -35,6 +35,6 @@ public class RutaControlador {
     //Metodo listar rutas favoritas para un usuario con su correo
     @GetMapping("/listarFav/{correo}")
     public List<Ruta> listarRutasFavoritasCon(@PathVariable("correo") String correoUsuario) {
-        return rutaServicio.listarRutasFavoritas();
+        return rutaServicio.listarRutasFavoritas(correoUsuario);
     }
 }
