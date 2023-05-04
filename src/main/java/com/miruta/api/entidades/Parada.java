@@ -12,12 +12,12 @@ public class Parada implements Serializable {
     //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idPar;
+    private Long idPar;
 
     @Column(length = 45, nullable = false)
     private String nombrePar;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 200, nullable = false)
     private String direccionPar;
 
     @Column(nullable = false)
@@ -41,7 +41,7 @@ public class Parada implements Serializable {
     public Parada() {
     }
 
-    public Parada(int idPar, String nombrePar, String direccionPar, float longitudPar, float latitudPar, String imgPar) {
+    public Parada(Long idPar, String nombrePar, String direccionPar, float longitudPar, float latitudPar, String imgPar) {
         this.idPar = idPar;
         this.nombrePar = nombrePar;
         this.direccionPar = direccionPar;
@@ -53,7 +53,7 @@ public class Parada implements Serializable {
 
 
     //Getters
-    public int getIdPar() {
+    public Long getIdPar() {
         return idPar;
     }
 
@@ -84,7 +84,7 @@ public class Parada implements Serializable {
 
 
     //Setters
-    public void setIdPar(int idPar) {
+    public void setIdPar(Long idPar) {
         this.idPar = idPar;
     }
 

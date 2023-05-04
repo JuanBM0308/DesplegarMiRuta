@@ -13,7 +13,7 @@ public class Ruta implements Serializable {
     //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idRut;
+    private Long idRut;
 
     @Column(length = 45, nullable = false)
     private String lugarInicioRut;
@@ -53,7 +53,7 @@ public class Ruta implements Serializable {
     public Ruta() {
     }
 
-    public Ruta(int idRut, String lugarInicioRut, String lugarDestinoRut, Time horaInicioRut, Time horaFinalRut, String marcadorRut, String diasDisponiblesRut) {
+    public Ruta(Long idRut, String lugarInicioRut, String lugarDestinoRut, Time horaInicioRut, Time horaFinalRut, String marcadorRut, String diasDisponiblesRut) {
         this.idRut = idRut;
         this.lugarInicioRut = lugarInicioRut;
         this.lugarDestinoRut = lugarDestinoRut;
@@ -66,7 +66,7 @@ public class Ruta implements Serializable {
 
 
     //Getters
-    public int getIdRut() {
+    public Long getIdRut() {
         return idRut;
     }
 
@@ -109,7 +109,7 @@ public class Ruta implements Serializable {
 
 
     //Setters
-    public void setIdRut(int idRut) {
+    public void setIdRut(Long idRut) {
         this.idRut = idRut;
     }
 

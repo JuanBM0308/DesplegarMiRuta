@@ -12,7 +12,7 @@ public class BusHasRuta implements Serializable{
     //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idBusHasRut;
+    private Long idBusHasRut;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "placaBus", referencedColumnName = "placaBus", nullable = false)
@@ -30,7 +30,7 @@ public class BusHasRuta implements Serializable{
     public BusHasRuta() {
     }
 
-    public BusHasRuta(int idBusHasRut, Bus buses, Ruta rutas) {
+    public BusHasRuta(Long idBusHasRut, Bus buses, Ruta rutas) {
         this.idBusHasRut = idBusHasRut;
         this.buses = buses;
         this.rutas = rutas;
@@ -39,7 +39,7 @@ public class BusHasRuta implements Serializable{
 
 
     //Getters
-    public int getIdBusHasRut() {
+    public Long getIdBusHasRut() {
         return idBusHasRut;
     }
 
@@ -54,7 +54,7 @@ public class BusHasRuta implements Serializable{
 
 
     //Setters
-    public void setIdBusHasRut(int idBusHasRut) {
+    public void setIdBusHasRut(Long idBusHasRut) {
         this.idBusHasRut = idBusHasRut;
     }
 

@@ -12,7 +12,7 @@ public class ParadaHasRuta implements Serializable{
     //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idParHasRut;
+    private Long idParHasRut;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPar", referencedColumnName = "idPar", nullable = false)
@@ -29,7 +29,7 @@ public class ParadaHasRuta implements Serializable{
     public ParadaHasRuta() {
     }
 
-    public ParadaHasRuta(int idParHasRut, Parada paradas, Ruta rutas) {
+    public ParadaHasRuta(Long idParHasRut, Parada paradas, Ruta rutas) {
         this.idParHasRut = idParHasRut;
         this.paradas = paradas;
         this.rutas = rutas;
@@ -38,7 +38,7 @@ public class ParadaHasRuta implements Serializable{
 
 
     //Getters
-    public int getIdParHasRut() {
+    public Long getIdParHasRut() {
         return idParHasRut;
     }
 
@@ -53,7 +53,7 @@ public class ParadaHasRuta implements Serializable{
 
 
     //Setters
-    public void setIdParHasRut(int idParHasRut) {
+    public void setIdParHasRut(Long idParHasRut) {
         this.idParHasRut = idParHasRut;
     }
 
