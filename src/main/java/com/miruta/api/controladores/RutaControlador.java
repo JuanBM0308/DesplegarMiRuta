@@ -1,18 +1,14 @@
 package com.miruta.api.controladores;
 
-import com.miruta.api.entidades.Ruta;
 import com.miruta.api.entidades.UsuarioHasRuta;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import com.miruta.api.entidades.Ruta;
 
 import com.miruta.api.servicios.RutaServicioImpl;
+
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/ruta")
@@ -36,5 +32,13 @@ public class RutaControlador {
     @GetMapping("/listarFav/{correo}")
     public List<Ruta> listarRutasFavoritasCon(@PathVariable("correo") String correoUsuario) {
         return rutaServicio.listarRutasFavoritas(correoUsuario);
+    }
+
+
+
+    //Metodo agregar rutas favoritas para un usuario
+    @PostMapping("/agregarFav")
+    public String agregarRutaFavoritaCon(@RequestBody UsuarioHasRuta usuarioHasRuta) {
+        return rutaServicio.agregarRutaFavorita(usuarioHasRuta);
     }
 }

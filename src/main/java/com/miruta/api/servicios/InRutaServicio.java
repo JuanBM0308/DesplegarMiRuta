@@ -4,9 +4,6 @@ import com.miruta.api.entidades.Ruta;
 import com.miruta.api.entidades.UsuarioHasRuta;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 public interface InRutaServicio {
 
@@ -17,5 +14,10 @@ public interface InRutaServicio {
 
     //Metodo listar rutas favoritas para un usuario con su correo
     List<Ruta> listarRutasFavoritas(String correoUsuario);
+
+
+
+    //Metodo agregar rutas favoritas para un usuario
+    String agregarRutaFavorita(UsuarioHasRuta usuarioHasRuta);
 
 }

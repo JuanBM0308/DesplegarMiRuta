@@ -2,15 +2,16 @@ package com.miruta.api.servicios;
 
 import com.miruta.api.entidades.Ruta;
 import com.miruta.api.entidades.UsuarioHasRuta;
+
 import com.miruta.api.interfaces.InRutaDao;
+import com.miruta.api.interfaces.InUsuarioDao;
 import com.miruta.api.interfaces.InUsuarioHasRutaDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @Service
 public class RutaServicioImpl implements InRutaServicio{
@@ -19,9 +20,13 @@ public class RutaServicioImpl implements InRutaServicio{
     @Autowired
     private InRutaDao rutaDao;
 
-    //Objeto DAO(Repositorio) de ruta
+    //Objeto DAO(Repositorio) de usuarioHasRuta
     @Autowired
     private InUsuarioHasRutaDao usuarioHasRutaDao;
+
+    //Objeto DAO(Repositorio) de usuario
+    @Autowired
+    private InUsuarioDao usuarioDao;
 
 
 
@@ -44,10 +49,17 @@ public class RutaServicioImpl implements InRutaServicio{
             }
         }
 
-        System.out.println(listaIdRuta);
-        List<Ruta> rutas = rutaDao.findAllById(listaIdRuta);
+        return rutaDao.findAllById(listaIdRuta);
+    }
 
-        return rutas;
+
+
+    //Metodo agregar rutas favoritas para un usuario
+    @Override
+    public String agregarRutaFavorita(UsuarioHasRuta usuarioHasRuta) {
+
+
+        return "{'respuesta': 'Agregada a favoritos'}";
     }
 
 }
