@@ -37,8 +37,8 @@ public class RutaControlador {
 
 
     //Metodo agregar rutas favoritas para un usuario
-    @PostMapping("/agregarFav")
-    public String agregarRutaFavoritaCon(@RequestBody UsuarioHasRuta usuarioHasRuta) {
-        return rutaServicio.agregarRutaFavorita(usuarioHasRuta);
+    @GetMapping("/agregarFav/{idRut}/{correo}")
+    public String agregarRutaFavoritaCon(@PathVariable("idRut") Long idRuta, @PathVariable("correo") String correoUsu) {
+        return rutaServicio.agregarRutaFavorita(idRuta, correoUsu);
     }
 }

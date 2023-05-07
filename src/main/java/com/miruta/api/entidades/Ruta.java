@@ -31,9 +31,6 @@ public class Ruta implements Serializable {
     @Temporal(TemporalType.TIME)
     private Time horaFinalRut;
 
-    @Column(nullable = false)
-    private String marcadorRut;
-
     @Column(length = 20, nullable = false)
     private String diasDisponiblesRut;
 
@@ -55,13 +52,12 @@ public class Ruta implements Serializable {
     public Ruta() {
     }
 
-    public Ruta(Long idRut, String lugarInicioRut, String lugarDestinoRut, Time horaInicioRut, Time horaFinalRut, String marcadorRut, String diasDisponiblesRut) {
+    public Ruta(Long idRut, String lugarInicioRut, String lugarDestinoRut, Time horaInicioRut, Time horaFinalRut, String diasDisponiblesRut) {
         this.idRut = idRut;
         this.lugarInicioRut = lugarInicioRut;
         this.lugarDestinoRut = lugarDestinoRut;
         this.horaInicioRut = horaInicioRut;
         this.horaFinalRut = horaFinalRut;
-        this.marcadorRut = marcadorRut;
         this.diasDisponiblesRut = diasDisponiblesRut;
     }
 
@@ -86,10 +82,6 @@ public class Ruta implements Serializable {
 
     public Time getHoraFinalRut() {
         return horaFinalRut;
-    }
-
-    public String getMarcadorRut() {
-        return marcadorRut;
     }
 
     public String getDiasDisponiblesRut() {
@@ -131,10 +123,6 @@ public class Ruta implements Serializable {
         this.horaFinalRut = horaFinalRut;
     }
 
-    public void setMarcadorRut(String marcadorRut) {
-        this.marcadorRut = marcadorRut;
-    }
-
     public void setDiasDisponiblesRut(String diasDisponiblesRut) {
         this.diasDisponiblesRut = diasDisponiblesRut;
     }
@@ -162,8 +150,10 @@ public class Ruta implements Serializable {
                 ", lugarDestinoRut='" + lugarDestinoRut + '\'' +
                 ", horaInicioRut=" + horaInicioRut +
                 ", horaFinalRut=" + horaFinalRut +
-                ", marcadorRut='" + marcadorRut + '\'' +
                 ", diasDisponiblesRut='" + diasDisponiblesRut + '\'' +
+                ", usuarioHasRuta=" + usuarioHasRuta +
+                ", paradaHasRuta=" + paradaHasRuta +
+                ", busHasRuta=" + busHasRuta +
                 '}';
     }
 }

@@ -56,8 +56,8 @@ public class RutaServicioImpl implements InRutaServicio{
 
     //Metodo agregar rutas favoritas para un usuario
     @Override
-    public String agregarRutaFavorita(UsuarioHasRuta usuarioHasRuta) {
-
+    public String agregarRutaFavorita(Long idRuta, String correoUsu) {
+        usuarioHasRutaDao.agregarRutaFavoritaDao(idRuta, correoUsu);
 
         return "{'respuesta': 'Agregada a favoritos'}";
     }

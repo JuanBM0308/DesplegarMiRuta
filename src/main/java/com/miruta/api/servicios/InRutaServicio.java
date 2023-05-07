@@ -18,6 +18,6 @@ public interface InRutaServicio {
 
 
     //Metodo agregar rutas favoritas para un usuario
-    String agregarRutaFavorita(UsuarioHasRuta usuarioHasRuta);
+    String agregarRutaFavorita(Long idRuta, String correoUsu);
 
 }
