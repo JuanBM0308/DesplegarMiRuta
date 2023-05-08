@@ -1,9 +1,9 @@
 package com.miruta.api.servicios;
 
-import com.miruta.api.interfaces.InParadaDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.miruta.api.interfaces.InParadaDao;
 import com.miruta.api.entidades.Parada;
 import java.util.List;
 

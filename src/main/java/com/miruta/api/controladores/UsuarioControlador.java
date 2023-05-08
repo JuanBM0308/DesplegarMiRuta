@@ -1,8 +1,8 @@
 package com.miruta.api.controladores;
 
-import com.miruta.api.entidades.Parada;
+import com.miruta.api.entidades.Usuario;
 
-import com.miruta.api.servicios.ParadaServicioImpl;
+import com.miruta.api.servicios.UsuarioServicioImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/parada")
-public class ParadaControlador {
+@RequestMapping("/usuario")
+public class UsuarioControlador {
 
-    //Objeto para servicio de parada
+    //Objeto para servicio de usuario
     @Autowired
-    ParadaServicioImpl paradaServicio;
+    UsuarioServicioImpl usuarioServicio;
 
 
 
-    //Metodo listar todas las paradas
+    //Metodo listar todos los usuarios
     @GetMapping("/listar")
-    public List<Parada> listarParadasCon() {
-        return paradaServicio.listarParadas();
+    public List<Usuario> listarUsuariosCon() {
+        return usuarioServicio.listarUsuarios();
     }
 
 }

@@ -25,6 +25,7 @@ public class ParadaHasRuta implements Serializable{
     private Ruta rutas;
 
 
+
     //Constructores
     public ParadaHasRuta() {
     }

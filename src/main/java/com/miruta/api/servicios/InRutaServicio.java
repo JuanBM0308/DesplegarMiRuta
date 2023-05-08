@@ -1,8 +1,7 @@
 package com.miruta.api.servicios;
 
 import com.miruta.api.entidades.Ruta;
-import com.miruta.api.entidades.UsuarioHasRuta;
-
+import com.miruta.api.modelos.UsuarioHasRutaModelo;
 import java.util.List;
 
 public interface InRutaServicio {
@@ -12,12 +11,17 @@ public interface InRutaServicio {
 
 
 
+    //Metodo guardar ruta nueva
+    String guardarRuta(Ruta ruta);
+
+
+
     //Metodo listar rutas favoritas para un usuario con su correo
     List<Ruta> listarRutasFavoritas(String correoUsuario);
 
 
 
     //Metodo agregar rutas favoritas para un usuario
-    String agregarRutaFavorita(Long idRuta, String correoUsu);
+    String agregarRutaFavorita(UsuarioHasRutaModelo usuarioHasRutaModelo);
 
 }

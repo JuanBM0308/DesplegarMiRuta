@@ -1,12 +1,13 @@
 package com.miruta.api.controladores;
 
-import com.miruta.api.entidades.UsuarioHasRuta;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import com.miruta.api.modelos.UsuarioHasRutaModelo;
 
 import com.miruta.api.entidades.Ruta;
 
 import com.miruta.api.servicios.RutaServicioImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +29,14 @@ public class RutaControlador {
 
 
 
+    //Metodo guardar ruta nueva
+    @PostMapping("/guardar")
+    public String guardarRutaCon(@RequestBody Ruta ruta) {
+        return rutaServicio.guardarRuta(ruta);
+    }
+
+
+
     //Metodo listar rutas favoritas para un usuario con su correo
     @GetMapping("/listarFav/{correo}")
     public List<Ruta> listarRutasFavoritasCon(@PathVariable("correo") String correoUsuario) {
@@ -37,8 +46,8 @@ public class RutaControlador {
 
 
     //Metodo agregar rutas favoritas para un usuario
-    @GetMapping("/agregarFav/{idRut}/{correo}")
-    public String agregarRutaFavoritaCon(@PathVariable("idRut") Long idRuta, @PathVariable("correo") String correoUsu) {
-        return rutaServicio.agregarRutaFavorita(idRuta, correoUsu);
+    @PostMapping("/agregarFav")
+    public String agregarRutaFavoritaCon(@RequestBody UsuarioHasRutaModelo usuarioHasRutaModelo) {
+        return rutaServicio.agregarRutaFavorita(usuarioHasRutaModelo);
     }
 }
