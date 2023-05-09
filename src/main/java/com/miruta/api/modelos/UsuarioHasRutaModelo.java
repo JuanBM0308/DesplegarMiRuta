@@ -3,7 +3,7 @@ package com.miruta.api.modelos;
 public class UsuarioHasRutaModelo {
 
     //Atributos
-    private Long idUsu;
+    private String correoUsu;
     private Long idRut;
 
 
@@ -12,16 +12,16 @@ public class UsuarioHasRutaModelo {
     public UsuarioHasRutaModelo() {
     }
 
-    public UsuarioHasRutaModelo(Long idUsu, Long idRut) {
-        this.idUsu = idUsu;
+    public UsuarioHasRutaModelo(String correoUsu, Long idRut) {
+        this.correoUsu = correoUsu;
         this.idRut = idRut;
     }
 
 
 
     //Getters
-    public Long getIdUsu() {
-        return idUsu;
+    public String getCorreoUsu() {
+        return correoUsu;
     }
 
     public Long getIdRut() {
@@ -31,8 +31,8 @@ public class UsuarioHasRutaModelo {
 
 
     //Setters
-    public void setIdUsu(Long idUsu) {
-        this.idUsu = idUsu;
+    public void setCorreoUsu(String correoUsu) {
+        this.correoUsu = correoUsu;
     }
 
     public void setIdRut(Long idRut) {

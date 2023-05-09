@@ -70,7 +70,7 @@ public class RutaServicioImpl implements InRutaServicio{
     @Override
     public String agregarRutaFavorita(UsuarioHasRutaModelo usuarioHasRutaModelo) {
         UsuarioHasRuta usuarioHasRuta = new UsuarioHasRuta();
-        Usuario usuario = usuarioDao.findById(usuarioHasRutaModelo.getIdUsu()).orElse(null);
+        Usuario usuario = usuarioDao.findByCorreoUsu(usuarioHasRutaModelo.getCorreoUsu()).orElse(null);
         Ruta ruta = rutaDao.findById(usuarioHasRutaModelo.getIdRut()).orElse(null);
 
         usuarioHasRuta.setUsuarios(usuario);
