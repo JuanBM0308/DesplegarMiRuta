@@ -37,6 +37,14 @@ public class RutaControlador {
 
 
 
+    //Obtener id de las rutas favoritas para un usuario con su correo
+    @GetMapping("/listaId/{correo}")
+    public List<Long> listaIdRutasFavoritas(@PathVariable("correo") String correoUsuario) {
+        return rutaServicio.listaIdRutasFavoritas(correoUsuario);
+    }
+
+
+
     //Metodo listar rutas favoritas para un usuario con su correo
     @GetMapping("/listarFav/{correo}")
     public List<Ruta> listarRutasFavoritasCon(@PathVariable("correo") String correoUsuario) {

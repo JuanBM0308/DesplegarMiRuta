@@ -50,9 +50,9 @@ public class RutaServicioImpl implements InRutaServicio{
 
 
 
-    //Metodo listar rutas favoritas para un usuario con su correo
+    //Obtener id de las rutas favoritas para un usuario con su correo
     @Override
-    public List<Ruta> listarRutasFavoritas(String correoUsuario) {
+    public List<Long> listaIdRutasFavoritas(String correoUsuario) {
         List<Long> listaIdRuta = new ArrayList<>();
 
         for (UsuarioHasRuta usuHasRuta: usuarioHasRutaDao.findAll()) {
@@ -61,7 +61,15 @@ public class RutaServicioImpl implements InRutaServicio{
             }
         }
 
-        return rutaDao.findAllById(listaIdRuta);
+        return listaIdRuta;
+    }
+
+
+
+    //Metodo listar rutas favoritas para un usuario con su correo
+    @Override
+    public List<Ruta> listarRutasFavoritas(String correoUsuario) {
+        return rutaDao.findAllById(listaIdRutasFavoritas(correoUsuario));
     }
 
 

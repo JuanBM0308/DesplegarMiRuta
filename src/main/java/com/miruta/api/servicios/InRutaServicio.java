@@ -16,6 +16,11 @@ public interface InRutaServicio {
 
 
 
+    //Obtener id de las rutas favoritas para un usuario con su correo
+    List<Long> listaIdRutasFavoritas(String correoUsuario);
+
+
+
     //Metodo listar rutas favoritas para un usuario con su correo
     List<Ruta> listarRutasFavoritas(String correoUsuario);
 
