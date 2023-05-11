@@ -1,9 +1,11 @@
 package com.miruta.api.servicios;
 
+import com.miruta.api.entidades.ParadaHasRuta;
 import com.miruta.api.entidades.Ruta;
 import com.miruta.api.entidades.Usuario;
 import com.miruta.api.entidades.UsuarioHasRuta;
 
+import com.miruta.api.interfaces.InParadaHasRutaDao;
 import com.miruta.api.interfaces.InRutaDao;
 import com.miruta.api.interfaces.InUsuarioDao;
 import com.miruta.api.interfaces.InUsuarioHasRutaDao;
@@ -31,6 +33,10 @@ public class RutaServicioImpl implements InRutaServicio{
     @Autowired
     InUsuarioDao usuarioDao;
 
+    //Objeto DAO(Repositorio) de paradaHasRuta
+    @Autowired
+    InParadaHasRutaDao paradaHasRutaDao;
+
 
 
     //Metodo listar todas las rutas
@@ -50,9 +56,72 @@ public class RutaServicioImpl implements InRutaServicio{
 
 
 
+    //Metodo listar rutas favoritas para un usuario con su correo
+    @Override
+    public List<Ruta> listarRutasFavoritas(String correoUsuario) {
+        return rutaDao.findAllById(listaIdRutas(correoUsuario));
+    }
+
+
+
+    //Metodo agregar rutas favoritas para un usuario
+    @Override
+    public String agregarRutaFavorita(UsuarioHasRutaModelo usuarioHasRutaModelo) {
+        String respuesta = "{'respuesta': 'No se agrego a favoritos'}";
+
+        UsuarioHasRuta usuarioHasRuta = new UsuarioHasRuta();
+        Usuario usuario = usuarioDao.findByCorreoUsu(usuarioHasRutaModelo.getCorreoUsu()).orElse(null);
+        Ruta ruta = rutaDao.findById(usuarioHasRutaModelo.getIdRut()).orElse(null);
+
+        if (usuario != null && ruta != null) {
+            usuarioHasRuta.setUsuarios(usuario);
+            usuarioHasRuta.setRutas(ruta);
+            usuarioHasRutaDao.save(usuarioHasRuta);
+            respuesta = "{'respuesta': 'Agregada a favoritos'}";
+        }
+
+        return respuesta;
+    }
+
+
+
+    //Metodo eliminar rutas favoritas para un usuario
+    @Override
+    public String eliminarRutaFavorita(UsuarioHasRutaModelo usuarioHasRutaModelo) {
+        String respuesta = "{'respuesta': 'No se elimino de favoritos'}";
+
+        Usuario usuario = usuarioDao.findByCorreoUsu(usuarioHasRutaModelo.getCorreoUsu()).orElse(null);
+        Ruta ruta = rutaDao.findById(usuarioHasRutaModelo.getIdRut()).orElse(null);
+
+        if (usuario != null && ruta != null) {
+            UsuarioHasRuta usuarioHasRuta = usuarioHasRutaDao.findByUsuariosAndRutas(usuario, ruta).orElse(null);
+
+            if (usuarioHasRuta != null) {
+                usuarioHasRutaDao.delete(usuarioHasRuta);
+                respuesta = "{'respuesta': 'Eliminada de favoritos'}";
+            }
+        }
+
+        return respuesta;
+    }
+
+
+
+    //Metodo listar todas las rutas que pasan por una parada
+    @Override
+    public List<Ruta> listarRutas_parada(Long idPar) {
+        return rutaDao.findAllById(listaIdRutas(idPar));
+    }
+
+
+
+
+
+
+
     //Obtener id de las rutas favoritas para un usuario con su correo
     @Override
-    public List<Long> listaIdRutasFavoritas(String correoUsuario) {
+    public List<Long> listaIdRutas(String correoUsuario) {
         List<Long> listaIdRuta = new ArrayList<>();
 
         for (UsuarioHasRuta usuHasRuta: usuarioHasRutaDao.findAll()) {
@@ -64,29 +133,17 @@ public class RutaServicioImpl implements InRutaServicio{
         return listaIdRuta;
     }
 
-
-
-    //Metodo listar rutas favoritas para un usuario con su correo
+    //Obtener id de las rutas para una parada con su id
     @Override
-    public List<Ruta> listarRutasFavoritas(String correoUsuario) {
-        return rutaDao.findAllById(listaIdRutasFavoritas(correoUsuario));
+    public List<Long> listaIdRutas(Long idPar) {
+        List<Long> listaIdRuta = new ArrayList<>();
+
+        for (ParadaHasRuta parHasRuta: paradaHasRutaDao.findAll()) {
+            if (parHasRuta.getParadas().getIdPar().equals(idPar)) {
+                listaIdRuta.add(parHasRuta.getRutas().getIdRut());
+            }
+        }
+
+        return listaIdRuta;
     }
-
-
-
-    //Metodo agregar rutas favoritas para un usuario
-    @Override
-    public String agregarRutaFavorita(UsuarioHasRutaModelo usuarioHasRutaModelo) {
-        UsuarioHasRuta usuarioHasRuta = new UsuarioHasRuta();
-        Usuario usuario = usuarioDao.findByCorreoUsu(usuarioHasRutaModelo.getCorreoUsu()).orElse(null);
-        Ruta ruta = rutaDao.findById(usuarioHasRutaModelo.getIdRut()).orElse(null);
-
-        usuarioHasRuta.setUsuarios(usuario);
-        usuarioHasRuta.setRutas(ruta);
-
-        usuarioHasRutaDao.save(usuarioHasRuta);
-
-        return "{'respuesta': 'Agregada a favoritos'}";
-    }
-
 }

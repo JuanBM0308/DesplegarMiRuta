@@ -40,7 +40,7 @@ public class RutaControlador {
     //Obtener id de las rutas favoritas para un usuario con su correo
     @GetMapping("/listaId/{correo}")
     public List<Long> listaIdRutasFavoritas(@PathVariable("correo") String correoUsuario) {
-        return rutaServicio.listaIdRutasFavoritas(correoUsuario);
+        return rutaServicio.listaIdRutas(correoUsuario);
     }
 
 
@@ -57,5 +57,21 @@ public class RutaControlador {
     @PostMapping("/agregarFav")
     public String agregarRutaFavoritaCon(@RequestBody UsuarioHasRutaModelo usuarioHasRutaModelo) {
         return rutaServicio.agregarRutaFavorita(usuarioHasRutaModelo);
+    }
+
+
+
+    //Metodo eliminar rutas favoritas para un usuario
+    @DeleteMapping("/eliminarFav")
+    public String eliminarRutaFavoritaCon(@RequestBody UsuarioHasRutaModelo usuarioHasRutaModelo) {
+        return rutaServicio.eliminarRutaFavorita(usuarioHasRutaModelo);
+    }
+
+
+
+    //Metodo listar todas las rutas que pasan por una parada
+    @GetMapping("/listarPar/{idPar}")
+    public List<Ruta> listarRutas_paradaCon(@PathVariable("idPar") Long idPar) {
+        return rutaServicio.listarRutas_parada(idPar);
     }
 }

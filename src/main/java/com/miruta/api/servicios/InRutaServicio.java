@@ -16,11 +16,6 @@ public interface InRutaServicio {
 
 
 
-    //Obtener id de las rutas favoritas para un usuario con su correo
-    List<Long> listaIdRutasFavoritas(String correoUsuario);
-
-
-
     //Metodo listar rutas favoritas para un usuario con su correo
     List<Ruta> listarRutasFavoritas(String correoUsuario);
 
@@ -29,4 +24,25 @@ public interface InRutaServicio {
     //Metodo agregar rutas favoritas para un usuario
     String agregarRutaFavorita(UsuarioHasRutaModelo usuarioHasRutaModelo);
 
+
+
+    //Metodo eliminar rutas favoritas para un usuario
+    String eliminarRutaFavorita(UsuarioHasRutaModelo usuarioHasRutaModelo);
+
+
+
+    //Metodo listar todas las rutas que pasan por una parada
+    List<Ruta> listarRutas_parada(Long idPar);
+
+
+
+
+
+
+
+    //Obtener id de las rutas favoritas para un usuario con su correo
+    List<Long> listaIdRutas(String correoUsuario);
+
+    //Obtener id de las rutas para una parada con su id
+    List<Long> listaIdRutas(Long idPar);
 }
