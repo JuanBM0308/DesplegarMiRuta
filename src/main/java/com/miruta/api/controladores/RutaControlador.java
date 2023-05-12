@@ -62,7 +62,7 @@ public class RutaControlador {
 
 
     //Metodo eliminar rutas favoritas para un usuario
-    @DeleteMapping("/eliminarFav")
+    @PostMapping("/eliminarFav")
     public String eliminarRutaFavoritaCon(@RequestBody UsuarioHasRutaModelo usuarioHasRutaModelo) {
         return rutaServicio.eliminarRutaFavorita(usuarioHasRutaModelo);
     }
