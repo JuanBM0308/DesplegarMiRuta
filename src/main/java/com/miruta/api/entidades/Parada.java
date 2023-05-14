@@ -124,6 +124,7 @@ public class Parada implements Serializable {
                 ", longitudPar=" + longitudPar +
                 ", latitudPar=" + latitudPar +
                 ", imgPar='" + imgPar + '\'' +
+                ", paradaHasRuta=" + paradaHasRuta +
                 '}';
     }
 }

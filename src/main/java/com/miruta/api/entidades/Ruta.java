@@ -46,6 +46,9 @@ public class Ruta implements Serializable {
     @OneToMany(mappedBy = "rutas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<BusHasRuta> busHasRuta;
 
+    @OneToMany(mappedBy = "rutas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<GiroHasRuta> giroHasRuta;
+
 
 
     //Constructores
@@ -100,6 +103,10 @@ public class Ruta implements Serializable {
         return busHasRuta;
     }
 
+    public Set<GiroHasRuta> getGiroHasRuta() {
+        return giroHasRuta;
+    }
+
 
 
     //Setters
@@ -139,6 +146,10 @@ public class Ruta implements Serializable {
         this.busHasRuta = busHasRuta;
     }
 
+    public void setGiroHasRuta(Set<GiroHasRuta> giroHasRuta) {
+        this.giroHasRuta = giroHasRuta;
+    }
+
 
 
     //Metodo toString
@@ -154,6 +165,7 @@ public class Ruta implements Serializable {
                 ", usuarioHasRuta=" + usuarioHasRuta +
                 ", paradaHasRuta=" + paradaHasRuta +
                 ", busHasRuta=" + busHasRuta +
+                ", giroHasRuta=" + giroHasRuta +
                 '}';
     }
 }

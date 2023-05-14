@@ -59,6 +59,7 @@ public class Bus implements Serializable {
     public String toString() {
         return "Bus{" +
                 "placaBus='" + placaBus + '\'' +
+                ", busHasRuta=" + busHasRuta +
                 '}';
     }
 }

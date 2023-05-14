@@ -125,6 +125,7 @@ public class Usuario implements Serializable {
                 ", nombreUsu='" + nombreUsu + '\'' +
                 ", fotoUsu='" + fotoUsu + '\'' +
                 ", tipoUsuario=" + tipoUsuario +
+                ", usuarioHasRuta=" + usuarioHasRuta +
                 '}';
     }
 }
