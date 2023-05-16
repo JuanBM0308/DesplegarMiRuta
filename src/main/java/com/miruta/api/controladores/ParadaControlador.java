@@ -6,6 +6,7 @@ import com.miruta.api.servicios.ParadaServicioImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,4 +28,11 @@ public class ParadaControlador {
         return paradaServicio.listarParadas();
     }
 
+
+
+    //Metodo listar paradas por ruta
+    @GetMapping("/listarRut/{idRut}")
+    public List<Parada> listarParadas_rutaCon(@PathVariable("idRut") Long idRut) {
+        return paradaServicio.listarParadas_ruta(idRut);
+    }
 }
