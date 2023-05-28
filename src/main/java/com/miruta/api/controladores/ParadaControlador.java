@@ -35,4 +35,12 @@ public class ParadaControlador {
     public List<Parada> listarParadas_rutaCon(@PathVariable("idRut") Long idRut) {
         return paradaServicio.listarParadas_ruta(idRut);
     }
+
+
+
+    //Metodo listar nombre de las paradas por ruta
+    @GetMapping("/listarNombreRut/{idRut}")
+    public List<String> listarNomParadas_rutaCon(@PathVariable("idRut") Long idRut) {
+        return paradaServicio.listarNomParadas_ruta(idRut);
+    }
 }

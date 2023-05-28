@@ -40,7 +40,17 @@ public class ParadaServicioImpl implements InParadaServicio{
 
 
 
+    //Metodo listar nombre de las paradas por ruta
+    @Override
+    public List<String> listarNomParadas_ruta(Long idRut) {
+        List<String> listaNomParadas = new ArrayList<>();
 
+        for (Parada parada : paradaDao.findAllById(listaIdParadas(idRut))) {
+            listaNomParadas.add(parada.getNombrePar());
+        }
+
+        return listaNomParadas;
+    }
 
 
 

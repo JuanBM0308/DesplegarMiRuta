@@ -15,6 +15,11 @@ public interface InParadaServicio {
 
 
 
+    //Metodo listar nombre de las paradas por ruta
+    List<String> listarNomParadas_ruta(Long idRut);
+
+
+
 
 
 
