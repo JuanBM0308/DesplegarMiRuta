@@ -15,10 +15,10 @@ public class Giro implements Serializable {
     private Long idGir;
 
     @Column(nullable = false)
-    private float longitudGir;
+    private Double longitudGir;
 
     @Column(nullable = false)
-    private float latitudGir;
+    private Double latitudGir;
 
 
 
@@ -32,7 +32,7 @@ public class Giro implements Serializable {
     public Giro() {
     }
 
-    public Giro(Long idGir, float longitudGir, float latitudGir) {
+    public Giro(Long idGir, Double longitudGir, Double latitudGir) {
         this.idGir = idGir;
         this.longitudGir = longitudGir;
         this.latitudGir = latitudGir;
@@ -45,11 +45,11 @@ public class Giro implements Serializable {
         return idGir;
     }
 
-    public float getLongitudGir() {
+    public Double getLongitudGir() {
         return longitudGir;
     }
 
-    public float getLatitudGir() {
+    public Double getLatitudGir() {
         return latitudGir;
     }
 
@@ -64,11 +64,11 @@ public class Giro implements Serializable {
         this.idGir = idGir;
     }
 
-    public void setLongitudGir(float longitudGir) {
+    public void setLongitudGir(Double longitudGir) {
         this.longitudGir = longitudGir;
     }
 
-    public void setLatitudGir(float latitudGir) {
+    public void setLatitudGir(Double latitudGir) {
         this.latitudGir = latitudGir;
     }
 

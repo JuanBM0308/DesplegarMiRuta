@@ -23,10 +23,10 @@ public class Parada implements Serializable {
     private String direccionPar;
 
     @Column(nullable = false)
-    private float longitudPar;
+    private Double longitudPar;
 
     @Column(nullable = false)
-    private float latitudPar;
+    private Double latitudPar;
 
     @Column(length = 500, nullable = false)
     private String imgPar;
@@ -43,7 +43,7 @@ public class Parada implements Serializable {
     public Parada() {
     }
 
-    public Parada(Long idPar, String nombrePar, String direccionPar, float longitudPar, float latitudPar, String imgPar) {
+    public Parada(Long idPar, String nombrePar, String direccionPar, Double longitudPar, Double latitudPar, String imgPar) {
         this.idPar = idPar;
         this.nombrePar = nombrePar;
         this.direccionPar = direccionPar;
@@ -67,11 +67,11 @@ public class Parada implements Serializable {
         return direccionPar;
     }
 
-    public float getLongitudPar() {
+    public Double getLongitudPar() {
         return longitudPar;
     }
 
-    public float getLatitudPar() {
+    public Double getLatitudPar() {
         return latitudPar;
     }
 
@@ -98,11 +98,11 @@ public class Parada implements Serializable {
         this.direccionPar = direccionPar;
     }
 
-    public void setLongitudPar(float longitudPar) {
+    public void setLongitudPar(Double longitudPar) {
         this.longitudPar = longitudPar;
     }
 
-    public void setLatitudPar(float latitudPar) {
+    public void setLatitudPar(Double latitudPar) {
         this.latitudPar = latitudPar;
     }
 
