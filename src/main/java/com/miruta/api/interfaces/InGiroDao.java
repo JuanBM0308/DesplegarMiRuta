@@ -11,7 +11,8 @@ import java.util.Map;
 public interface InGiroDao extends JpaRepository<Giro, Long> {
 
     @Query(nativeQuery = true,
-    value = "SELECT g.*, orden_gir_has_rut FROM giros g LEFT JOIN giros_has_rutas ghr on g.id_gir = ghr.id_gir where ghr.id_rut = ?1")
+    value = "SELECT g.id_gir as idGir, latitud_gir as latitudGir, longitud_gir as longitudGir, orden_gir_has_rut as ordenGirHasRut" +
+            " FROM giros g LEFT JOIN giros_has_rutas ghr on g.id_gir = ghr.id_gir where ghr.id_rut = ?1")
     List<Map<String, Object>> findGirosByRutaId(Long idRut);
 
 }
