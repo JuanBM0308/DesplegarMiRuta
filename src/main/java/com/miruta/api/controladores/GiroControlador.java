@@ -22,7 +22,7 @@ public class GiroControlador {
 
 
     //Metodo listar giros por ruta
-    @GetMapping("listarRut/{idRut}")
+    @GetMapping("/listarRut/{idRut}")
     public List<Map<String, Object>> listarGiros_rutaCon(@PathVariable("idRut") Long idRut) {
         return giroServicio.listarGiros_ruta(idRut);
     }
