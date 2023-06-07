@@ -50,8 +50,24 @@ public class RutaServicioImpl implements InRutaServicio{
     //Metodo guardar ruta nueva
     @Override
     public String guardarRuta(Ruta ruta) {
-        rutaDao.save(ruta);
-        return "{'respuesta': 'Ruta agregada con exito'}";
+        var respuesta = "{'respuesta':'Error guardar ruta'}";
+        if (!rutaDao.existsById(ruta.getIdRut())){
+            rutaDao.save(ruta);
+            respuesta = "{'respuesta': 'Ruta agregada con exito'}";
+        }
+        return respuesta;
+    }
+
+
+
+    //Metodo eliminar ruta
+    public String EliminarUsuario(Long idRut) {
+        var respuesta = "{'respuesta' : 'Error eliminar'}";
+        if (rutaDao.existsById(idRut)){
+            rutaDao.deleteById(idRut);
+            respuesta = "{'respuesta' : 'Eliminado exitosamente'}";
+        }
+        return respuesta;
     }
 
 
@@ -146,4 +162,6 @@ public class RutaServicioImpl implements InRutaServicio{
 
         return listaIdRuta;
     }
+
+
 }

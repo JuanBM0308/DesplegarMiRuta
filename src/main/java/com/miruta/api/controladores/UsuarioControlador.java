@@ -43,4 +43,20 @@ public class UsuarioControlador {
         return usuarioServicio.getUsuario(idUsu);
     }
 
+
+
+    //Metodo agregar usuario
+    @PostMapping("/agregar")
+    public String agregarUsuarioCon(@RequestBody Usuario usuario) {
+        return usuarioServicio.agregarUsuario(usuario);
+    }
+
+
+
+
+    //Metodo eliminar usuario
+    @DeleteMapping("/eliminar/{correoUsu}")
+    public String eliminarUsuarioCon(@PathVariable("correoUsu")Long idUsu) {
+        return usuarioServicio.eliminarUsuario(idUsu);
+    }
 }

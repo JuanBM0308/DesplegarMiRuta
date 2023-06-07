@@ -23,4 +23,34 @@ public class GiroServicioImpl implements InGiroServicio {
         return giroDao.findGirosByRutaId(idRut);
     }
 
+
+
+    //metodo listar todos los giros existentes
+    public List<Giro> listar() {
+        return giroDao.findAll();
+    }
+
+
+
+    //Metodo agregar giro
+    public String agregarGiro(Giro giro) {
+        var respuesta = "{'respuesta' : 'No se pudo agregar'}";
+        if (!giroDao.existsById(giro.getIdGir())){
+            giroDao.deleteById(giro.getIdGir());
+            respuesta = "{'respuesta' : 'Agregado exitosamente'}";
+        }
+        return respuesta;
+    }
+
+
+
+    //Metodo eliminar un giro
+    public String eliminarGiro(Long idGir) {
+        var respuesta = "{'respuesta' : 'Error eliminar'}";
+        if (giroDao.existsById(idGir)){
+            giroDao.deleteById(idGir);
+            respuesta = "{'respuesta' : 'Eliminado exitosamente'}";
+        }
+        return respuesta;
+    }
 }

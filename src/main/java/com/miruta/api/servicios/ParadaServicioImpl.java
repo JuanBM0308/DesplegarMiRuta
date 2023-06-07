@@ -68,4 +68,28 @@ public class ParadaServicioImpl implements InParadaServicio{
         return listaIdParada;
     }
 
+
+
+    //Metodo para agregar parada
+    public String agregarParada(Parada parada){
+        var respuesta = "{'respuesta':'Error al Agregar'}";
+        if (!paradaDao.existsById(parada.getIdPar())){
+            paradaDao.save(parada);
+            respuesta = "{'respuesta':'Agregado correctamente'}";
+        }
+        return respuesta;
+    }
+
+
+
+    //Metodo para eliminar parada
+    public String eliminarParada(Long idPar) {
+        var respuesta = "{'respuesta':'no se pudo eliminar'}";
+        if (paradaDao.existsById(idPar)) {
+            paradaDao.deleteById(idPar);
+            respuesta = "{'respuesta':'eliminado correctamente'}";
+        }
+        return respuesta;
+    }
+
 }

@@ -55,4 +55,28 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
         return usuarioDao.findById(idUsu);
     }
 
+
+
+    //Metodo agregar usuario
+    public String agregarUsuario(Usuario usuario) {
+        var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
+        if (!usuarioDao.existsById(usuario.getIdUsu())){
+            usuarioDao.save(usuario);
+            respuesta = "{'respuesta' : 'Se agrego un usuario'}";
+        }
+        return respuesta;
+    }
+
+
+
+    //Metodo eliminar usuario
+    public String eliminarUsuario(Long idUsu) {
+        var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
+        if (usuarioDao.existsById(idUsu)){
+            usuarioDao.deleteById(idUsu);
+            respuesta = "{'respuesta' : 'Eliminado exitosamente'}";
+        }
+        return respuesta;
+    }
+
 }

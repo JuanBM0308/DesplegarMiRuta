@@ -27,12 +27,21 @@ public class RutaControlador {
         return rutaServicio.listarRutas();
     }
 
+    //
 
 
     //Metodo guardar ruta nueva
     @PostMapping("/guardar")
     public String guardarRutaCon(@RequestBody Ruta ruta) {
         return rutaServicio.guardarRuta(ruta);
+    }
+
+
+
+    //Metodo eliminar ruta
+    @DeleteMapping("/eliminar/{id}")
+    public String EliminarUsuarioCon(@PathVariable("id")Long idRut) {
+        return rutaServicio.EliminarUsuario(idRut);
     }
 
 

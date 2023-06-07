@@ -5,10 +5,7 @@ import com.miruta.api.entidades.Parada;
 import com.miruta.api.servicios.ParadaServicioImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,22 @@ public class ParadaControlador {
     @GetMapping("/listar")
     public List<Parada> listarParadasCon() {
         return paradaServicio.listarParadas();
+    }
+
+
+
+    //Metodo para agregar parada
+    @PostMapping("/agregar")
+    public String agregarParadaCon(@RequestBody Parada parada){
+        return paradaServicio.agregarParada(parada);
+    }
+
+
+
+    //Metodo para eliminar parada
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminarParadaCon(@PathVariable("id")Long idPar){
+        return paradaServicio.eliminarParada(idPar);
     }
 
 
