@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.miruta.api.entidades.Usuario;
 import com.miruta.api.interfaces.InUsuarioDao;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -79,4 +81,23 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
         return respuesta;
     }
 
+    // Metodo actualizar usuario
+
+    public String actualizarUsuario(Long idUsu,String correo, String contrasena, String nombre, String foto){
+        var respuesta = "{'respuesta' : 'No se realizo la actualizacion del usuario'}";
+
+        Usuario usuario = usuarioDao.findById(idUsu).get();
+
+        if(correo != null){
+            usuario.setNombreUsu(nombre);
+            usuario.setContraseniaUsu(contrasena);
+            usuario.setFotoUsu(foto);
+
+            usuarioDao.save(usuario);
+
+            respuesta = "{'respuesta' : 'Se realizo actualizacion del usuario'}";
+        }
+        
+        return respuesta;
+    }
 }

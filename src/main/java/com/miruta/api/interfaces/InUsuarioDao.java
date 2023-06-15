@@ -9,4 +9,7 @@ public interface InUsuarioDao extends JpaRepository<Usuario, Long> {
 
     Optional<Usuario> findByCorreoUsu(String correoUsu);
 
+
+    // Optional<Usuario> existByCorreoUsu(String correoUsu);
+
 }
