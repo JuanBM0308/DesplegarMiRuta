@@ -45,18 +45,20 @@ public class UsuarioControlador {
 
 
 
-    //Metodo agregar usuario
-    @PostMapping("/agregar")
-    public String agregarUsuarioCon(@RequestBody Usuario usuario) {
-        return usuarioServicio.agregarUsuario(usuario);
+    //Metodo guardar usuario nuevo
+    @PostMapping("/guardar")
+    public String guardarUsuarioCon(@RequestBody Usuario usuario) {
+        return usuarioServicio.guardarUsuario(usuario);
     }
-
 
 
 
     //Metodo eliminar usuario
-    @DeleteMapping("/eliminar/{correoUsu}")
-    public String eliminarUsuarioCon(@PathVariable("correoUsu")Long idUsu) {
+    @DeleteMapping("/eliminar/{idUsu}")
+    public String eliminarUsuarioCon(@PathVariable("idUsu")Long idUsu) {
         return usuarioServicio.eliminarUsuario(idUsu);
     }
+
+
+
 }

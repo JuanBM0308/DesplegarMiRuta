@@ -19,23 +19,26 @@ public class BusControlador {
 
     //Metodo listar todos los buses
     @GetMapping("/listar")
-    public List<Bus> ListarBusCon(){
+    public List<Bus> listarBusCon(){
         return BusServicio.listarBus();
     }
 
 
 
-    //Metodo agregar Bus
-    @PostMapping("/agregar")
-    public String AgregarBusCon(@RequestBody Bus bus){
-        return BusServicio.agregarBus(bus);
+    //Metodo guardar bus nuevo
+    @PostMapping("/guardar")
+    public String guardarBusCon(@RequestBody Bus bus){
+        return BusServicio.guardarBus(bus);
     }
 
 
 
     //Metodo eliminar bus
-    @DeleteMapping("/eliminar/{placa}")
-    public String EliminarBusCon(@PathVariable("placa")String placaBus){
+    @DeleteMapping("/eliminar/{placaBus}")
+    public String eliminarBusCon(@PathVariable("placaBus")String placaBus){
         return BusServicio.eliminarBus(placaBus);
     }
+
+
+
 }

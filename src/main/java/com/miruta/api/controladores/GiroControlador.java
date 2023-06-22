@@ -25,25 +25,26 @@ public class GiroControlador {
     }
 
 
-    //metodo listar todos los puntos existentes
+
+    //Metodo listar todos los puntos de giro
     @GetMapping("/listar")
-    public List<Giro> listarGiro() {
-        return giroServicio.listar();
+    public List<Giro> listarGirosCon() {
+        return giroServicio.listarGiros();
     }
 
 
 
-    //Metodo agregar giro
-    @PostMapping("/agregar")
-    public String agregarGiroCon(@RequestBody Giro giro) {
-        return giroServicio.agregarGiro(giro);
+    //Metodo guardar giro nuevo
+    @PostMapping("/guardar")
+    public String guardarGiroCon(@RequestBody Giro giro) {
+        return giroServicio.guardarGiro(giro);
     }
 
 
 
     //Metodo eliminar un giro
-    @DeleteMapping("/eliminar/{id}")
-    public String eliminarGiroCon(@PathVariable("id")Long idGir) {
+    @DeleteMapping("/eliminar/{idGir}")
+    public String eliminarGiroCon(@PathVariable("idGir")Long idGir) {
         return giroServicio.eliminarGiro(idGir);
     }
 

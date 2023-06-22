@@ -9,7 +9,19 @@ public interface InGiroServicio {
     //Metodo listar giros por ruta
     List<Map<String, Object>> listarGiros_ruta(Long idRut);
 
-    //listar todos los puntos de giro
-    List<Giro> listar();
+
+
+    //Metodo listar todos los puntos de giro
+    List<Giro> listarGiros();
+
+
+
+    //Metodo guardar giro nuevo
+    String guardarGiro(Giro giro);
+
+
+
+    //Metodo eliminar giro
+    String eliminarGiro(Long idGir);
 
 }

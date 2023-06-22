@@ -54,6 +54,34 @@ public class ParadaServicioImpl implements InParadaServicio{
 
 
 
+    //Metodo guardar parada nueva
+    @Override
+    public String guardarParada(Parada parada) {
+        paradaDao.save(parada);
+        return "{'respuesta': 'Parada agregada con exito'}";
+    }
+
+
+
+    //Metodo eliminar parada
+    @Override
+    public String eliminarParada(Long idPar) {
+        String respuesta = "{'respuesta' : 'Error eliminar parada'}";
+
+        if (paradaDao.existsById(idPar)) {
+            paradaDao.deleteById(idPar);
+            respuesta = "{'respuesta' : 'Parada eliminada con exito'}";
+        }
+
+        return respuesta;
+    }
+
+
+
+
+
+
+
     //Obtener id de las paradas para una ruta
     @Override
     public List<Long> listaIdParadas(Long idRut) {
@@ -69,27 +97,5 @@ public class ParadaServicioImpl implements InParadaServicio{
     }
 
 
-
-    //Metodo para agregar parada
-    public String agregarParada(Parada parada){
-        var respuesta = "{'respuesta':'Error al Agregar'}";
-        if (!paradaDao.existsById(parada.getIdPar())){
-            paradaDao.save(parada);
-            respuesta = "{'respuesta':'Agregado correctamente'}";
-        }
-        return respuesta;
-    }
-
-
-
-    //Metodo para eliminar parada
-    public String eliminarParada(Long idPar) {
-        var respuesta = "{'respuesta':'no se pudo eliminar'}";
-        if (paradaDao.existsById(idPar)) {
-            paradaDao.deleteById(idPar);
-            respuesta = "{'respuesta':'eliminado correctamente'}";
-        }
-        return respuesta;
-    }
 
 }

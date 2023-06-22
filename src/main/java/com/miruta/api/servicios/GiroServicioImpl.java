@@ -25,32 +25,36 @@ public class GiroServicioImpl implements InGiroServicio {
 
 
 
-    //metodo listar todos los giros existentes
-    public List<Giro> listar() {
+    //Metodo listar todos los puntos de giro
+    @Override
+    public List<Giro> listarGiros() {
         return giroDao.findAll();
     }
 
 
 
-    //Metodo agregar giro
-    public String agregarGiro(Giro giro) {
-        var respuesta = "{'respuesta' : 'No se pudo agregar'}";
-        if (!giroDao.existsById(giro.getIdGir())){
-            giroDao.deleteById(giro.getIdGir());
-            respuesta = "{'respuesta' : 'Agregado exitosamente'}";
-        }
-        return respuesta;
+    //Metodo guardar giro nuevo
+    @Override
+    public String guardarGiro(Giro giro) {
+        giroDao.save(giro);
+        return "{'respuesta': 'Giro agregado con exito'}";
     }
 
 
 
-    //Metodo eliminar un giro
+    //Metodo eliminar giro
+    @Override
     public String eliminarGiro(Long idGir) {
-        var respuesta = "{'respuesta' : 'Error eliminar'}";
+        String respuesta = "{'respuesta' : 'Error eliminar giro'}";
+
         if (giroDao.existsById(idGir)){
             giroDao.deleteById(idGir);
-            respuesta = "{'respuesta' : 'Eliminado exitosamente'}";
+            respuesta = "{'respuesta' : 'Giro eliminado con exito'}";
         }
+
         return respuesta;
     }
+
+
+
 }

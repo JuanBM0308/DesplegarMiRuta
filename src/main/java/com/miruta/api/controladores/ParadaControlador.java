@@ -27,17 +27,17 @@ public class ParadaControlador {
 
 
 
-    //Metodo para agregar parada
-    @PostMapping("/agregar")
-    public String agregarParadaCon(@RequestBody Parada parada){
-        return paradaServicio.agregarParada(parada);
+    //Metodo guardar parada nueva
+    @PostMapping("/guardar")
+    public String guardarParadaCon(@RequestBody Parada parada){
+        return paradaServicio.guardarParada(parada);
     }
 
 
 
-    //Metodo para eliminar parada
-    @DeleteMapping("/eliminar/{id}")
-    public String eliminarParadaCon(@PathVariable("id")Long idPar){
+    //Metodo eliminar parada
+    @DeleteMapping("/eliminar/{idPar}")
+    public String eliminarParadaCon(@PathVariable("idPar")Long idPar){
         return paradaServicio.eliminarParada(idPar);
     }
 

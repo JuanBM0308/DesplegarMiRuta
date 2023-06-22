@@ -16,6 +16,11 @@ public interface InRutaServicio {
 
 
 
+    //Metodo eliminar ruta
+    String eliminarRuta(Long idRut);
+
+
+
     //Metodo listar rutas favoritas para un usuario con su correo
     List<Ruta> listarRutasFavoritas(String correoUsuario);
 

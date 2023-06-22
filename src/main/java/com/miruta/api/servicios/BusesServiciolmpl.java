@@ -15,31 +15,43 @@ public class BusesServiciolmpl implements InBusServicio {
     @Autowired
     InBusDao busDao;
 
-    
-    
+
+
     //Metodo listar todos los buses
     @Override
     public List<Bus> listarBus() {
         return busDao.findAll();
     }
 
-    
-    //metodo agregar bus
-    public String agregarBus(Bus bus) {
-        var respuesta = "{'respuesta':'Error al Agregar'}";
+
+
+    //Metodo guardar bus nuevo
+    @Override
+    public String guardarBus(Bus bus) {
+        String respuesta = "{'respuesta': 'Error al Agregar bus'}";
+
         if (!busDao.existsById(bus.getPlacaBus())){
             busDao.save(bus);
-            respuesta = "{'respuesta':'Agregado correctamente'}";
+            respuesta = "{'respuesta': 'Bus agregado con exito'}";
         }
+
         return respuesta;
     }
 
+
+
+    //Metodo eliminar bus
+    @Override
     public String eliminarBus(String placaBus) {
-        var respuesta = "{'respuesta' : 'Error eliminar'}";
+        String respuesta = "{'respuesta' : 'Error eliminar bus'}";
+
         if (busDao.existsById(placaBus)){
             busDao.deleteById(placaBus);
-            return respuesta = "{'respuesta':'Eliminado correctamente'}";
+            respuesta = "{'respuesta':'Bus eliminado con exito'}";
         }
+
         return respuesta;
     }
+
+
 }

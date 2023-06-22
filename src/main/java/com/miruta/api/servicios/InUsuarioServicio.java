@@ -22,4 +22,14 @@ public interface InUsuarioServicio {
     //Metodo buscar usuario por id
     Optional<Usuario> getUsuario(Long idUsu);
 
+
+
+    //Metodo guardar usuario nuevo
+    String guardarUsuario(Usuario usuario);
+
+
+
+    //Metodo eliminar usuario
+    String eliminarUsuario(Long idUsu);
+
 }

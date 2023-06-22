@@ -27,7 +27,6 @@ public class RutaControlador {
         return rutaServicio.listarRutas();
     }
 
-    //
 
 
     //Metodo guardar ruta nueva
@@ -39,9 +38,9 @@ public class RutaControlador {
 
 
     //Metodo eliminar ruta
-    @DeleteMapping("/eliminar/{id}")
-    public String EliminarUsuarioCon(@PathVariable("id")Long idRut) {
-        return rutaServicio.EliminarUsuario(idRut);
+    @DeleteMapping("/eliminar/{idRut}")
+    public String eliminarRutaCon(@PathVariable("idRut")Long idRut) {
+        return rutaServicio.eliminarRuta(idRut);
     }
 
 

@@ -20,6 +20,16 @@ public interface InParadaServicio {
 
 
 
+    //Metodo guardar parada nueva
+    String guardarParada(Parada parada);
+
+
+
+    //Metodo eliminar parada
+    String eliminarParada(Long idPar);
+
+
+
 
 
 
