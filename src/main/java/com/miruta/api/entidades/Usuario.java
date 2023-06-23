@@ -12,8 +12,7 @@ public class Usuario implements Serializable {
 
     //Atributos
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsu;
+    private Long identificacionUsu;
 
     @Column(length = 45, nullable = false)
     private String correoUsu;
@@ -36,14 +35,17 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuarios", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<UsuarioHasRuta> usuarioHasRuta;
 
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Bus bus;
+
 
 
     //Constructores
     public Usuario() {
     }
 
-    public Usuario(Long idUsu, String correoUsu, String contraseniaUsu, String nombreUsu, String fotoUsu, Integer tipoUsuario) {
-        this.idUsu = idUsu;
+    public Usuario(Long identificacionUsu, String correoUsu, String contraseniaUsu, String nombreUsu, String fotoUsu, Integer tipoUsuario) {
+        this.identificacionUsu = identificacionUsu;
         this.correoUsu = correoUsu;
         this.contraseniaUsu = contraseniaUsu;
         this.nombreUsu = nombreUsu;
@@ -54,8 +56,8 @@ public class Usuario implements Serializable {
 
 
     //Getters
-    public Long getIdUsu() {
-        return idUsu;
+    public Long getIdentificacionUsu() {
+        return identificacionUsu;
     }
 
     public String getCorreoUsu() {
@@ -82,11 +84,15 @@ public class Usuario implements Serializable {
         return usuarioHasRuta;
     }
 
+    public Bus getBus() {
+        return bus;
+    }
+
 
 
     //Setters
-    public void setIdUsu(Long idUsu) {
-        this.idUsu = idUsu;
+    public void setIdentificacionUsu(Long identificacionUsu) {
+        this.identificacionUsu = identificacionUsu;
     }
 
     public void setCorreoUsu(String correoUsu) {
@@ -113,19 +119,26 @@ public class Usuario implements Serializable {
         this.usuarioHasRuta = usuarioHasRuta;
     }
 
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
+
 
 
     //Metodo toString
     @Override
     public String toString() {
         return "Usuario{" +
-                "idUsu=" + idUsu +
+                "identificacionUsu=" + identificacionUsu +
                 ", correoUsu='" + correoUsu + '\'' +
                 ", contraseniaUsu='" + contraseniaUsu + '\'' +
                 ", nombreUsu='" + nombreUsu + '\'' +
                 ", fotoUsu='" + fotoUsu + '\'' +
                 ", tipoUsuario=" + tipoUsuario +
                 ", usuarioHasRuta=" + usuarioHasRuta +
+                ", bus=" + bus +
                 '}';
     }
+
+
 }

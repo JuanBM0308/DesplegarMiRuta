@@ -15,7 +15,7 @@ public class UsuarioHasRuta implements Serializable {
     private Long idUsuHasRut;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idUsu", referencedColumnName = "idUsu", nullable = false)
+    @JoinColumn(name = "identificacionUsu", referencedColumnName = "identificacionUsu", nullable = false)
     @JsonIgnore
     private Usuario usuarios;
 

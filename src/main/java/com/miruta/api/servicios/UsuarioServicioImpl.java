@@ -39,7 +39,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
             if (usuario.getContraseniaUsu().equals(usuarioModeloLogin.getContraseniaUsu())) {
                 respuesta = "{\n" +
                         "\"acceso\": true,\n" +
-                        "\"idUsu\": "+ usuario.getIdUsu() + "\n" +
+                        "\"idUsu\": "+ usuario.getIdentificacionUsu() + "\n" +
                         "}";
             }
         }

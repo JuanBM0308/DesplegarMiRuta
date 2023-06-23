@@ -41,6 +41,10 @@ public interface InRutaServicio {
 
 
 
+    //Metodo listar todas las rutas que tienen asignada un bus
+
+
+
 
 
 
