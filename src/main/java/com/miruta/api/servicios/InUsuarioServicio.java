@@ -20,7 +20,7 @@ public interface InUsuarioServicio {
 
 
     //Metodo buscar usuario por id
-    Optional<Usuario> getUsuario(Long idUsu);
+    Optional<Usuario> getUsuario(Long identificacionUsu);
 
 
 
@@ -30,6 +30,6 @@ public interface InUsuarioServicio {
 
 
     //Metodo eliminar usuario
-    String eliminarUsuario(Long idUsu);
+    String eliminarUsuario(Long identificacionUsu);
 
 }

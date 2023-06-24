@@ -1,14 +1,8 @@
 package com.miruta.api.servicios;
 
-import com.miruta.api.entidades.ParadaHasRuta;
-import com.miruta.api.entidades.Ruta;
-import com.miruta.api.entidades.Usuario;
-import com.miruta.api.entidades.UsuarioHasRuta;
+import com.miruta.api.entidades.*;
 
-import com.miruta.api.interfaces.InParadaHasRutaDao;
-import com.miruta.api.interfaces.InRutaDao;
-import com.miruta.api.interfaces.InUsuarioDao;
-import com.miruta.api.interfaces.InUsuarioHasRutaDao;
+import com.miruta.api.interfaces.*;
 
 import com.miruta.api.modelos.UsuarioHasRutaModelo;
 
@@ -36,6 +30,14 @@ public class RutaServicioImpl implements InRutaServicio{
     //Objeto DAO(Repositorio) de paradaHasRuta
     @Autowired
     InParadaHasRutaDao paradaHasRutaDao;
+
+    //Objeto DAO(Repositorio) de bus
+    @Autowired
+    InBusDao busDao;
+
+    //Objeto DAO(Repositorio) de BusHasRuta
+    @Autowired
+    InBusHasRutaDao busHasRutaDao;
 
 
 
@@ -130,6 +132,23 @@ public class RutaServicioImpl implements InRutaServicio{
 
 
 
+    //Metodo listar todas las rutas que tienen asignadas un bus
+    @Override
+    public List<Ruta> listarRutas_Bus(Long identificacionUsu) {
+        Usuario usuario = usuarioDao.findById(identificacionUsu).orElse(null);
+
+        if (usuario != null) {
+            Bus bus = busDao.findByUsuario(usuario).orElse(null);
+            if (bus != null) {
+                return rutaDao.findAllById(listaIdRutasBus(bus.getPlacaBus()));
+            }
+        }
+
+        return new ArrayList<>();
+    }
+
+
+
 
 
 
@@ -156,6 +175,20 @@ public class RutaServicioImpl implements InRutaServicio{
         for (ParadaHasRuta parHasRuta: paradaHasRutaDao.findAll()) {
             if (parHasRuta.getParadas().getIdPar().equals(idPar)) {
                 listaIdRuta.add(parHasRuta.getRutas().getIdRut());
+            }
+        }
+
+        return listaIdRuta;
+    }
+
+    //Obtener id de las rutas para un bus con la placa del bus
+    @Override
+    public List<Long> listaIdRutasBus(String placaBus) {
+        List<Long> listaIdRuta = new ArrayList<>();
+
+        for (BusHasRuta busHasRuta: busHasRutaDao.findAll()) {
+            if (busHasRuta.getBuses().getPlacaBus().equals(placaBus)) {
+                listaIdRuta.add(busHasRuta.getRutas().getIdRut());
             }
         }
 

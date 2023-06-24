@@ -51,8 +51,8 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
     //Metodo buscar usuario por id
     @Override
-    public Optional<Usuario> getUsuario(Long idUsu) {
-        return usuarioDao.findById(idUsu);
+    public Optional<Usuario> getUsuario(Long identificacionUsu) {
+        return usuarioDao.findById(identificacionUsu);
     }
 
 
@@ -68,11 +68,11 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
     //Metodo eliminar usuario
     @Override
-    public String eliminarUsuario(Long idUsu) {
+    public String eliminarUsuario(Long identificacionUsu) {
         String respuesta = "{'respuesta' : 'Error eliminar usuario'}";
 
-        if (usuarioDao.existsById(idUsu)){
-            usuarioDao.deleteById(idUsu);
+        if (usuarioDao.existsById(identificacionUsu)){
+            usuarioDao.deleteById(identificacionUsu);
             respuesta = "{'respuesta' : 'Usuario eliminado con exito'}";
         }
 

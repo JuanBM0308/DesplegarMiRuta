@@ -2,11 +2,14 @@ package com.miruta.api.servicios;
 
 
 import com.miruta.api.entidades.Bus;
+import com.miruta.api.entidades.Usuario;
 import com.miruta.api.interfaces.InBusDao;
+import com.miruta.api.interfaces.InUsuarioDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BusesServiciolmpl implements InBusServicio {
@@ -14,6 +17,10 @@ public class BusesServiciolmpl implements InBusServicio {
     //objeto DAO()repositorio de buses
     @Autowired
     InBusDao busDao;
+
+    //Objeto DAO(Repositorio) de usuario
+    @Autowired
+    InUsuarioDao usuarioDao;
 
 
 
@@ -51,6 +58,20 @@ public class BusesServiciolmpl implements InBusServicio {
         }
 
         return respuesta;
+    }
+
+
+
+    //Metodo buscar bus por identificacionUsu
+    @Override
+    public Optional<Bus> getBus(Long identificacionUsu) {
+        Usuario usuario = usuarioDao.findById(identificacionUsu).orElse(null);
+
+        if (usuario != null) {
+            return busDao.findByUsuario(usuario);
+        }
+
+        return Optional.empty();
     }
 
 

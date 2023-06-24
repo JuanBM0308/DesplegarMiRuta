@@ -82,4 +82,12 @@ public class RutaControlador {
     public List<Ruta> listarRutas_paradaCon(@PathVariable("idPar") Long idPar) {
         return rutaServicio.listarRutas_parada(idPar);
     }
+
+
+
+    //Metodo listar todas las rutas que tienen asignadas un bus
+    @GetMapping("/listarBus/{identificacionUsu}")
+    public List<Ruta> listarRutas_BusCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
+        return rutaServicio.listarRutas_Bus(identificacionUsu);
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bus")
@@ -13,14 +14,14 @@ public class BusControlador {
 
     //objeto para servicio de bus
     @Autowired
-    BusesServiciolmpl BusServicio;
+    BusesServiciolmpl busServicio;
 
 
 
     //Metodo listar todos los buses
     @GetMapping("/listar")
     public List<Bus> listarBusCon(){
-        return BusServicio.listarBus();
+        return busServicio.listarBus();
     }
 
 
@@ -28,7 +29,7 @@ public class BusControlador {
     //Metodo guardar bus nuevo
     @PostMapping("/guardar")
     public String guardarBusCon(@RequestBody Bus bus){
-        return BusServicio.guardarBus(bus);
+        return busServicio.guardarBus(bus);
     }
 
 
@@ -36,9 +37,16 @@ public class BusControlador {
     //Metodo eliminar bus
     @DeleteMapping("/eliminar/{placaBus}")
     public String eliminarBusCon(@PathVariable("placaBus")String placaBus){
-        return BusServicio.eliminarBus(placaBus);
+        return busServicio.eliminarBus(placaBus);
     }
 
+
+
+    //Metodo buscar bus por identificacionUsu
+    @GetMapping("/buscarUsu/{identificacionUsu}")
+    public Optional<Bus> getBusCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
+        return busServicio.getBus(identificacionUsu);
+    }
 
 
 }

@@ -41,7 +41,8 @@ public interface InRutaServicio {
 
 
 
-    //Metodo listar todas las rutas que tienen asignada un bus
+    //Metodo listar todas las rutas que tienen asignadas un bus
+    List<Ruta> listarRutas_Bus(Long identificacionUsu);
 
 
 
@@ -54,4 +55,7 @@ public interface InRutaServicio {
 
     //Obtener id de las rutas para una parada con su id
     List<Long> listaIdRutas(Long idPar);
+
+    //Obtener id de las rutas para un bus con la placa del bus
+    List<Long> listaIdRutasBus(String placaBus);
 }
