@@ -1,6 +1,7 @@
 package com.miruta.api.controladores;
 
 import com.miruta.api.entidades.Bus;
+import com.miruta.api.modelos.BusModelo;
 import com.miruta.api.servicios.BusesServiciolmpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class BusControlador {
 
     //Metodo guardar bus nuevo
     @PostMapping("/guardar")
-    public String guardarBusCon(@RequestBody Bus bus){
-        return busServicio.guardarBus(bus);
+    public String guardarBusCon(@RequestBody BusModelo busModelo){
+        return busServicio.guardarBus(busModelo);
     }
 
 
@@ -47,6 +48,15 @@ public class BusControlador {
     public Optional<Bus> getBusCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
         return busServicio.getBus(identificacionUsu);
     }
+
+
+
+    //Metodo actualizar localizacion del bus(longitudBus, latitudBus)
+    @PostMapping("/updateLocation")
+    public String actualizarLocalizacionBusCon(@RequestBody BusModelo busModelo) {
+        return busServicio.actualizarLocalizacionBus(busModelo);
+    }
+
 
 
 }

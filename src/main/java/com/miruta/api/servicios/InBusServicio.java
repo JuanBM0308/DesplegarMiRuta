@@ -1,6 +1,8 @@
 package com.miruta.api.servicios;
 
 import com.miruta.api.entidades.Bus;
+import com.miruta.api.modelos.BusModelo;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +14,7 @@ public interface InBusServicio {
 
 
     //Metodo guardar bus nuevo
-    String guardarBus(Bus bus);
+    String guardarBus(BusModelo busModelo);
 
 
 
@@ -23,5 +25,10 @@ public interface InBusServicio {
 
     //Metodo buscar bus por identificacionUsu
     Optional<Bus> getBus(Long identificacionUsu);
+
+
+
+    //Metodo actualizar localizacion del bus(longitudBus, latitudBus)
+    String actualizarLocalizacionBus(BusModelo busModelo);
 
 }
