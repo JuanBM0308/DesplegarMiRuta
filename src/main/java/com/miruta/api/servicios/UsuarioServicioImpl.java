@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.miruta.api.entidades.Usuario;
 import com.miruta.api.interfaces.InUsuarioDao;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -51,34 +53,51 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
     //Metodo buscar usuario por id
     @Override
-    public Optional<Usuario> getUsuario(Long identificacionUsu) {
-        return usuarioDao.findById(identificacionUsu);
+    public Optional<Usuario> getUsuario(Long idUsu) {
+        return usuarioDao.findById(idUsu);
     }
 
 
 
-    //Metodo guardar usuario nuevo
-    @Override
+    //Metodo agregar usuario
     public String guardarUsuario(Usuario usuario) {
-        usuarioDao.save(usuario);
-        return "{'respuesta': 'Usuario agregado con exito'}";
-    }
-
-
-
-    //Metodo eliminar usuario
-    @Override
-    public String eliminarUsuario(Long identificacionUsu) {
-        String respuesta = "{'respuesta' : 'Error eliminar usuario'}";
-
-        if (usuarioDao.existsById(identificacionUsu)){
-            usuarioDao.deleteById(identificacionUsu);
-            respuesta = "{'respuesta' : 'Usuario eliminado con exito'}";
+        var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
+        if (!usuarioDao.existsById(usuario.getIdentificacionUsu())){
+            usuarioDao.save(usuario);
+            respuesta = "{'respuesta' : 'Se agrego un usuario'}";
         }
-
         return respuesta;
     }
 
 
 
+    //Metodo eliminar usuario
+    public String eliminarUsuario(Long idUsu) {
+        var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
+        if (usuarioDao.existsById(idUsu)){
+            usuarioDao.deleteById(idUsu);
+            respuesta = "{'respuesta' : 'Eliminado exitosamente'}";
+        }
+        return respuesta;
+    }
+
+    // Metodo actualizar usuario
+
+    public String actualizarUsuario(Long idUsu,String correo, String contrasena, String nombre, String foto){
+        var respuesta = "{'respuesta' : 'No se realizo la actualizacion del usuario'}";
+
+        Usuario usuario = usuarioDao.findById(idUsu).get();
+
+        if(correo != null){
+            usuario.setNombreUsu(nombre);
+            usuario.setContraseniaUsu(contrasena);
+            usuario.setFotoUsu(foto);
+
+            usuarioDao.save(usuario);
+
+            respuesta = "{'respuesta' : 'Se realizo actualizacion del usuario'}";
+        }
+        
+        return respuesta;
+    }
 }
