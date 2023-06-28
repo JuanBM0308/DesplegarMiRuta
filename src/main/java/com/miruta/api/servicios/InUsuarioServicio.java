@@ -32,4 +32,7 @@ public interface InUsuarioServicio {
     //Metodo eliminar usuario
     String eliminarUsuario(Long identificacionUsu);
 
+
+    // Metodo actualizar usuario
+    String actualizarUsuario(Usuario usu);
 }

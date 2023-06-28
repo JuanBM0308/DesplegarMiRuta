@@ -8,6 +8,7 @@ import com.miruta.api.servicios.UsuarioServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.PublicKey;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,13 @@ public class UsuarioControlador {
         return usuarioServicio.eliminarUsuario(identificacionUsu);
     }
 
+
+
+    //Actualizar usuario
+    @PostMapping("/actualizar")
+    public String actualizarUsuarioCon(@RequestBody Usuario usu){
+        return usuarioServicio.actualizarUsuario(usu);
+    }
 
 
 }

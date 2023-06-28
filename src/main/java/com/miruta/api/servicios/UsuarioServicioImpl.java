@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.miruta.api.entidades.Usuario;
 import com.miruta.api.interfaces.InUsuarioDao;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -41,7 +41,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
             if (usuario.getContraseniaUsu().equals(usuarioModeloLogin.getContraseniaUsu())) {
                 respuesta = "{\n" +
                         "\"acceso\": true,\n" +
-                        "\"idUsu\": "+ usuario.getIdentificacionUsu() + "\n" +
+                        "\"identifiacion\": "+ usuario.getIdentificacionUsu() + "\n" +
                         "}";
             }
         }
@@ -51,15 +51,16 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
 
 
-    //Metodo buscar usuario por id
+    //Metodo buscar usuario por identificacion
     @Override
-    public Optional<Usuario> getUsuario(Long idUsu) {
-        return usuarioDao.findById(idUsu);
+    public Optional<Usuario> getUsuario(Long identificacionUsu) {
+        return usuarioDao.findById(identificacionUsu);
     }
 
 
 
     //Metodo agregar usuario
+    @Override
     public String guardarUsuario(Usuario usuario) {
         var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
         if (!usuarioDao.existsById(usuario.getIdentificacionUsu())){
@@ -72,6 +73,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
 
     //Metodo eliminar usuario
+    @Override
     public String eliminarUsuario(Long idUsu) {
         var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
         if (usuarioDao.existsById(idUsu)){
@@ -82,16 +84,18 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
     }
 
     // Metodo actualizar usuario
-
-    public String actualizarUsuario(Long idUsu,String correo, String contrasena, String nombre, String foto){
+    @Override
+    public String actualizarUsuario(Usuario usu){
         var respuesta = "{'respuesta' : 'No se realizo la actualizacion del usuario'}";
 
-        Usuario usuario = usuarioDao.findById(idUsu).get();
+        Usuario usuario = usuarioDao.findById(usu.getIdentificacionUsu())
+                .orElseThrow(() -> new NoSuchElementException("El usuario con identificación " + usu.getIdentificacionUsu() + " no existe en la base de datos"));
 
-        if(correo != null){
-            usuario.setNombreUsu(nombre);
-            usuario.setContraseniaUsu(contrasena);
-            usuario.setFotoUsu(foto);
+        if(usuario.getIdentificacionUsu() != null){
+            usuario.setCorreoUsu(usu.getCorreoUsu());
+            usuario.setContraseniaUsu(usu.getContraseniaUsu());
+            usuario.setNombreUsu(usu.getNombreUsu());
+            usuario.setFotoUsu(usu.getFotoUsu());
 
             usuarioDao.save(usuario);
 
