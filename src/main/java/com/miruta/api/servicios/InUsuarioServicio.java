@@ -24,12 +24,17 @@ public interface InUsuarioServicio {
 
 
 
-    //Metodo guardar usuario nuevo
-    String guardarUsuario(Usuario usuario);
+    //Metodo comprobar usuario nuevo
+    String comprobarUsuario(Usuario usuario);
 
 
 
     //Metodo eliminar usuario
     String eliminarUsuario(Long identificacionUsu);
+
+
+
+    //Metodo guardar usuario nuevo
+    String guardarUsuario(Usuario usuario);
 
 }

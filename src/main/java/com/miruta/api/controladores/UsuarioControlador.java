@@ -45,10 +45,10 @@ public class UsuarioControlador {
 
 
 
-    //Metodo guardar usuario nuevo
-    @PostMapping("/guardar")
-    public String guardarUsuarioCon(@RequestBody Usuario usuario) {
-        return usuarioServicio.guardarUsuario(usuario);
+    //Metodo comprobar usuario nuevo
+    @PostMapping("/comprobar")
+    public String comprobarUsuarioCon(@RequestBody Usuario usuario) {
+        return usuarioServicio.comprobarUsuario(usuario);
     }
 
 
@@ -61,4 +61,9 @@ public class UsuarioControlador {
 
 
 
+    //Metodo guardar usuario nuevo
+    @PostMapping("/guardar")
+    public String guardarUsuarioCon(@RequestBody Usuario usuario) {
+        return usuarioServicio.guardarUsuario(usuario);
+    }
 }
