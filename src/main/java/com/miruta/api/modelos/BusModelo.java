@@ -6,7 +6,7 @@ public class BusModelo {
     private String placaBus;
     private Double longitudBus;
     private Double latitudBus;
-    private Long identificacionUsu;
+    private Long identificacionCon;
 
 
 
@@ -14,11 +14,11 @@ public class BusModelo {
     public BusModelo() {
     }
 
-    public BusModelo(String placaBus, Double longitudBus, Double latitudBus, Long identificacionUsu) {
+    public BusModelo(String placaBus, Double longitudBus, Double latitudBus, Long identificacionCon) {
         this.placaBus = placaBus;
         this.longitudBus = longitudBus;
         this.latitudBus = latitudBus;
-        this.identificacionUsu = identificacionUsu;
+        this.identificacionCon = identificacionCon;
     }
 
 
@@ -36,8 +36,8 @@ public class BusModelo {
         return latitudBus;
     }
 
-    public Long getIdentificacionUsu() {
-        return identificacionUsu;
+    public Long getIdentificacionCon() {
+        return identificacionCon;
     }
 
 
@@ -55,9 +55,10 @@ public class BusModelo {
         this.latitudBus = latitudBus;
     }
 
-    public void setIdentificacionUsu(Long identificacionUsu) {
-        this.identificacionUsu = identificacionUsu;
+    public void setIdentificacionCon(Long identificacionCon) {
+        this.identificacionCon = identificacionCon;
     }
+
 
 
 }

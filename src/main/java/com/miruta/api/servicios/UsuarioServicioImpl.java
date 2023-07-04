@@ -45,7 +45,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
             if (usuario.getContraseniaUsu().equals(usuarioModeloLogin.getContraseniaUsu())) {
                 respuesta = "{\n" +
                         "\"acceso\": true,\n" +
-                        "\"idUsu\": "+ usuario.getIdentificacionUsu() + "\n" +
+                        "\"idUsu\": "+ usuario.getIdUsu() + "\n" +
                         "}";
             }
         }
@@ -57,8 +57,8 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
     //Metodo buscar usuario por id
     @Override
-    public Optional<Usuario> getUsuario(Long identificacionUsu) {
-        return usuarioDao.findById(identificacionUsu);
+    public Optional<Usuario> getUsuario(Long idUsu) {
+        return usuarioDao.findById(idUsu);
     }
 
 
@@ -67,45 +67,33 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
     @Override
     public String comprobarUsuario(Usuario usuario) {
         String respuesta;
+        Usuario usuarioCorreo = usuarioDao.findByCorreoUsu(usuario.getCorreoUsu()).orElse(null);
 
-        if (!usuarioDao.existsById(usuario.getIdentificacionUsu())) {
-            Usuario usuarioCorreo = usuarioDao.findByCorreoUsu(usuario.getCorreoUsu()).orElse(null);
+        if (usuarioCorreo == null) {
+            respuesta = "{\n" +
+                    "\"permiso\": true,\n" +
+                    "";
 
-            if (usuarioCorreo == null) {
-                respuesta = "{\n" +
-                        "\"permiso\": true,\n" +
-                        "";
+            int[] pines = new int[5];
+            pines[0] = (int)(Math.random() * 10);
+            pines[1] = (int)(Math.random() * 10);
+            pines[2] = (int)(Math.random() * 10);
+            pines[3] = (int)(Math.random() * 10);
+            pines[4] = (int)(Math.random() * 10);
 
-                int[] pines = new int[5];
+            respuesta += "\"pinUno\": "+pines[0]+",\n";
+            respuesta += "\"pinDos\": "+pines[1]+",\n";
+            respuesta += "\"pinTres\": "+pines[2]+",\n";
+            respuesta += "\"pinCuatro\": "+pines[3]+",\n";
+            respuesta += "\"pinCinco\": "+pines[4]+"\n";
+            respuesta += "}";
 
-                for (int i = 0; i < 5; i++) {
-                    int pin = (int)(Math.random() * 10);
-
-                    if (i == 4) {
-                        respuesta += "\"pin"+(i+1)+"\": "+pin+"\n";
-
-                    } else {
-                        respuesta += "\"pin"+(i+1)+"\": "+pin+",\n";
-                    }
-
-                    pines[i] = pin;
-                }
-
-                respuesta += "}";
-
-                enviarEmail(pines, usuario);
-
-            } else {
-                respuesta = "{\n" +
-                        "\"permiso\": false,\n" +
-                        "\"mensaje\": 'Usuario con correo "+usuario.getCorreoUsu()+" ya existente'\n" +
-                        "}";
-            }
+            enviarEmail(pines, usuario);
 
         } else {
             respuesta = "{\n" +
                     "\"permiso\": false,\n" +
-                    "\"mensaje\": 'Usuario con identificion "+usuario.getIdentificacionUsu()+" ya existente'\n" +
+                    "\"mensaje\": 'Usuario con correo "+usuario.getCorreoUsu()+" ya existente'\n" +
                     "}";
         }
 
@@ -116,11 +104,11 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
     //Metodo eliminar usuario
     @Override
-    public String eliminarUsuario(Long identificacionUsu) {
+    public String eliminarUsuario(Long idUsu) {
         String respuesta = "{'respuesta' : 'Error eliminar usuario'}";
 
-        if (usuarioDao.existsById(identificacionUsu)){
-            usuarioDao.deleteById(identificacionUsu);
+        if (usuarioDao.existsById(idUsu)){
+            usuarioDao.deleteById(idUsu);
             respuesta = "{'respuesta' : 'Usuario eliminado con exito'}";
         }
 

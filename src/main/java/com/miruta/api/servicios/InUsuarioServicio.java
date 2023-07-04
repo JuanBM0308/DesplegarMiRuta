@@ -4,7 +4,6 @@ import com.miruta.api.entidades.Usuario;
 import com.miruta.api.modelos.UsuarioModeloLogin;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface InUsuarioServicio {
@@ -20,7 +19,7 @@ public interface InUsuarioServicio {
 
 
     //Metodo buscar usuario por id
-    Optional<Usuario> getUsuario(Long identificacionUsu);
+    Optional<Usuario> getUsuario(Long idUsu);
 
 
 
@@ -30,7 +29,7 @@ public interface InUsuarioServicio {
 
 
     //Metodo eliminar usuario
-    String eliminarUsuario(Long identificacionUsu);
+    String eliminarUsuario(Long idUsu);
 
 
 

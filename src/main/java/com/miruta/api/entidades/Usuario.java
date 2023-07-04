@@ -12,7 +12,8 @@ public class Usuario implements Serializable {
 
     //Atributos
     @Id
-    private Long identificacionUsu;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idUsu;
 
     @Column(length = 45, nullable = false)
     private String correoUsu;
@@ -36,7 +37,7 @@ public class Usuario implements Serializable {
     private Set<UsuarioHasRuta> usuarioHasRuta;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Bus bus;
+    private Conductor conductor;
 
 
 
@@ -44,8 +45,8 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Long identificacionUsu, String correoUsu, String contraseniaUsu, String nombreUsu, String fotoUsu, Integer tipoUsuario) {
-        this.identificacionUsu = identificacionUsu;
+    public Usuario(Long idUsu, String correoUsu, String contraseniaUsu, String nombreUsu, String fotoUsu, Integer tipoUsuario) {
+        this.idUsu = idUsu;
         this.correoUsu = correoUsu;
         this.contraseniaUsu = contraseniaUsu;
         this.nombreUsu = nombreUsu;
@@ -56,8 +57,8 @@ public class Usuario implements Serializable {
 
 
     //Getters
-    public Long getIdentificacionUsu() {
-        return identificacionUsu;
+    public Long getIdUsu() {
+        return idUsu;
     }
 
     public String getCorreoUsu() {
@@ -84,15 +85,15 @@ public class Usuario implements Serializable {
         return usuarioHasRuta;
     }
 
-    public Bus getBus() {
-        return bus;
+    public Conductor getConductor() {
+        return conductor;
     }
 
 
 
     //Setters
-    public void setIdentificacionUsu(Long identificacionUsu) {
-        this.identificacionUsu = identificacionUsu;
+    public void setIdUsu(Long idUsu) {
+        this.idUsu = idUsu;
     }
 
     public void setCorreoUsu(String correoUsu) {
@@ -119,8 +120,8 @@ public class Usuario implements Serializable {
         this.usuarioHasRuta = usuarioHasRuta;
     }
 
-    public void setBus(Bus bus) {
-        this.bus = bus;
+    public void setConductor(Conductor conductor) {
+        this.conductor = conductor;
     }
 
 
@@ -129,16 +130,17 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Usuario{" +
-                "identificacionUsu=" + identificacionUsu +
+                "idUsu=" + idUsu +
                 ", correoUsu='" + correoUsu + '\'' +
                 ", contraseniaUsu='" + contraseniaUsu + '\'' +
                 ", nombreUsu='" + nombreUsu + '\'' +
                 ", fotoUsu='" + fotoUsu + '\'' +
                 ", tipoUsuario=" + tipoUsuario +
                 ", usuarioHasRuta=" + usuarioHasRuta +
-                ", bus=" + bus +
+                ", conductor=" + conductor +
                 '}';
     }
+
 
 
 }

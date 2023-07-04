@@ -86,8 +86,8 @@ public class RutaControlador {
 
 
     //Metodo listar todas las rutas que tienen asignadas un bus
-    @GetMapping("/listarBus/{identificacionUsu}")
-    public List<Ruta> listarRutas_BusCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
-        return rutaServicio.listarRutas_Bus(identificacionUsu);
+    @GetMapping("/listarBus/{identificacionCon}")
+    public List<Ruta> listarRutas_BusCon(@PathVariable("identificacionCon") Long identificacionCon) {
+        return rutaServicio.listarRutas_Bus(identificacionCon);
     }
 }

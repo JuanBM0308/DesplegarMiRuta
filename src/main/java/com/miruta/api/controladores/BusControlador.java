@@ -43,10 +43,10 @@ public class BusControlador {
 
 
 
-    //Metodo buscar bus por identificacionUsu
-    @GetMapping("/buscarUsu/{identificacionUsu}")
-    public Optional<Bus> getBusCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
-        return busServicio.getBus(identificacionUsu);
+    //Metodo buscar bus por identificacionCon
+    @GetMapping("/buscarUsu/{identificacionCon}")
+    public Optional<Bus> getBusCon(@PathVariable("identificacionCon") Long identificacionCon) {
+        return busServicio.getBus(identificacionCon);
     }
 
 

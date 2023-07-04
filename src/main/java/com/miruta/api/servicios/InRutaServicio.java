@@ -42,7 +42,7 @@ public interface InRutaServicio {
 
 
     //Metodo listar todas las rutas que tienen asignadas un bus
-    List<Ruta> listarRutas_Bus(Long identificacionUsu);
+    List<Ruta> listarRutas_Bus(Long identificacionCon);
 
 
 

@@ -39,6 +39,10 @@ public class RutaServicioImpl implements InRutaServicio{
     @Autowired
     InBusHasRutaDao busHasRutaDao;
 
+    //Objeto DAO(Repositorio) de Conductor
+    @Autowired
+    InConductorDao conductorDao;
+
 
 
     //Metodo listar todas las rutas
@@ -134,11 +138,11 @@ public class RutaServicioImpl implements InRutaServicio{
 
     //Metodo listar todas las rutas que tienen asignadas un bus
     @Override
-    public List<Ruta> listarRutas_Bus(Long identificacionUsu) {
-        Usuario usuario = usuarioDao.findById(identificacionUsu).orElse(null);
+    public List<Ruta> listarRutas_Bus(Long identificacionCon) {
+        Conductor conductor = conductorDao.findById(identificacionCon).orElse(null);
 
-        if (usuario != null) {
-            Bus bus = busDao.findByUsuario(usuario).orElse(null);
+        if (conductor != null) {
+            Bus bus = busDao.findByConductor(conductor).orElse(null);
             if (bus != null) {
                 return rutaDao.findAllById(listaIdRutasBus(bus.getPlacaBus()));
             }
