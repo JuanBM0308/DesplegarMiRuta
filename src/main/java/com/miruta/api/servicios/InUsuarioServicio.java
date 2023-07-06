@@ -40,4 +40,7 @@ public interface InUsuarioServicio {
 
     //Metodo actualizar usuario
     String actualizarUsuario(Usuario usu);
+
+
+
 }

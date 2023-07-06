@@ -2,7 +2,6 @@ package com.miruta.api.controladores;
 
 import com.miruta.api.entidades.Parada;
 
-import com.miruta.api.entidades.Usuario;
 import com.miruta.api.servicios.ParadaServicioImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +57,14 @@ public class ParadaControlador {
         return paradaServicio.listarNomParadas_ruta(idRut);
     }
 
+
+
     //Actualizar Parada
     @PutMapping("/actualizar")
     public String actualizarParadaCon(@RequestBody Parada parada){
         return paradaServicio.actualizarParada(parada);
     }
+
+
+
 }

@@ -1,6 +1,5 @@
 package com.miruta.api.servicios;
 
-import com.miruta.api.entidades.Giro;
 import com.miruta.api.entidades.Parada;
 import java.util.List;
 
@@ -30,10 +29,16 @@ public interface InParadaServicio {
     String eliminarParada(Long idPar);
 
 
-    //Obtener id de las paradas para una ruta
-    List<Long> listaIdParadas(Long idRut);
-
 
     //Actualizacion paradas
     String actualizarParada(Parada NueParada);
+
+
+
+
+
+
+
+    //Obtener id de las paradas para una ruta
+    List<Long> listaIdParadas(Long idRut);
 }

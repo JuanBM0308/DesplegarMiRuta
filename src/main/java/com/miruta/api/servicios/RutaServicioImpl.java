@@ -154,6 +154,30 @@ public class RutaServicioImpl implements InRutaServicio{
 
 
 
+    //Metodo actualizar ruta
+    @Override
+    public String actualizarRuta(Ruta NueRuta){
+        String respuesta = "{'respuesta' : 'No se realizo la actualizacion de la ruta'}";
+
+        Ruta ruta = rutaDao.findById(NueRuta.getIdRut())
+                .orElseThrow(() -> new NoSuchElementException("la parada #" + NueRuta.getIdRut() + " no existe en la base de datos"));
+
+        if(NueRuta.getIdRut() != null){
+            ruta.setLugarInicioRut(NueRuta.getLugarInicioRut());
+            ruta.setLugarDestinoRut(NueRuta.getLugarDestinoRut());
+            ruta.setHoraInicioRut(NueRuta.getHoraInicioRut());
+            ruta.setHoraFinalRut(NueRuta.getHoraFinalRut());
+            ruta.setDiasDisponiblesRut(NueRuta.getDiasDisponiblesRut());
+
+            rutaDao.save(ruta);
+
+            respuesta = "{'respuesta' : 'Se realizo actualizacion de la ruta'}";
+        }
+        return respuesta;
+    }
+
+
+
 
 
 
@@ -201,26 +225,5 @@ public class RutaServicioImpl implements InRutaServicio{
     }
 
 
-    //Metodo actualizar ruta
-    @Override
-    public String actualizarRuta(Ruta NueRuta){
-        String respuesta = "{'respuesta' : 'No se realizo la actualizacion de la ruta'}";
-
-        Ruta ruta = rutaDao.findById(NueRuta.getIdRut())
-                .orElseThrow(() -> new NoSuchElementException("la parada #" + NueRuta.getIdRut() + " no existe en la base de datos"));
-
-        if(NueRuta.getIdRut() != null){
-            ruta.setLugarInicioRut(NueRuta.getLugarInicioRut());
-            ruta.setLugarDestinoRut(NueRuta.getLugarDestinoRut());
-            ruta.setHoraInicioRut(NueRuta.getHoraInicioRut());
-            ruta.setHoraFinalRut(NueRuta.getHoraFinalRut());
-            ruta.setDiasDisponiblesRut(NueRuta.getDiasDisponiblesRut());
-
-            rutaDao.save(ruta);
-
-            respuesta = "{'respuesta' : 'Se realizo actualizacion de la ruta'}";
-        }
-        return respuesta;
-    }
 
 }

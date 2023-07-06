@@ -56,6 +56,8 @@ public class GiroServicioImpl implements InGiroServicio {
         return respuesta;
     }
 
+
+
     //Metodo actualizar GIRO
     @Override
     public String actualizarGiro(Giro camgiro){
@@ -75,4 +77,7 @@ public class GiroServicioImpl implements InGiroServicio {
 
         return respuesta;
     }
+
+
+
 }

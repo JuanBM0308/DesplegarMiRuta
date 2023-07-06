@@ -24,6 +24,7 @@ public class ParadaServicioImpl implements InParadaServicio {
     InParadaHasRutaDao paradaHasRutaDao;
 
 
+
     //Metodo listar todas las paradas
     @Override
     public List<Parada> listarParadas() {
@@ -31,11 +32,13 @@ public class ParadaServicioImpl implements InParadaServicio {
     }
 
 
+
     //Metodo listar paradas por ruta
     @Override
     public List<Parada> listarParadas_ruta(Long idRut) {
         return paradaDao.findAllById(listaIdParadas(idRut));
     }
+
 
 
     //Metodo listar nombre de las paradas por ruta
@@ -51,12 +54,14 @@ public class ParadaServicioImpl implements InParadaServicio {
     }
 
 
+
     //Metodo guardar parada nueva
     @Override
     public String guardarParada(Parada parada) {
         paradaDao.save(parada);
         return "{'respuesta': 'Parada agregada con exito'}";
     }
+
 
 
     //Metodo eliminar parada
@@ -70,21 +75,6 @@ public class ParadaServicioImpl implements InParadaServicio {
         }
 
         return respuesta;
-    }
-
-
-    //Obtener id de las paradas para una ruta
-    @Override
-    public List<Long> listaIdParadas(Long idRut) {
-        List<Long> listaIdParada = new ArrayList<>();
-
-        for (ParadaHasRuta parHasRuta : paradaHasRutaDao.findAll()) {
-            if (parHasRuta.getRutas().getIdRut().equals(idRut)) {
-                listaIdParada.add(parHasRuta.getParadas().getIdPar());
-            }
-        }
-
-        return listaIdParada;
     }
 
 
@@ -110,6 +100,27 @@ public class ParadaServicioImpl implements InParadaServicio {
         }
         return respuesta;
     }
+
+
+
+
+
+
+
+    //Obtener id de las paradas para una ruta
+    @Override
+    public List<Long> listaIdParadas(Long idRut) {
+        List<Long> listaIdParada = new ArrayList<>();
+
+        for (ParadaHasRuta parHasRuta : paradaHasRutaDao.findAll()) {
+            if (parHasRuta.getRutas().getIdRut().equals(idRut)) {
+                listaIdParada.add(parHasRuta.getParadas().getIdPar());
+            }
+        }
+
+        return listaIdParada;
+    }
+
 
 
 }

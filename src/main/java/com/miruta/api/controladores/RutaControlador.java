@@ -91,9 +91,14 @@ public class RutaControlador {
         return rutaServicio.listarRutas_Bus(identificacionCon);
     }
 
+
+
     //Actualizar Ruta
     @PutMapping("/actualizar")
     public String actualizarParadaCon(@RequestBody Ruta ruta){
         return rutaServicio.actualizarRuta(ruta);
     }
+
+
+
 }
