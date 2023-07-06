@@ -92,7 +92,7 @@ public class RutaControlador {
     }
 
     //Actualizar Ruta
-    @PostMapping("/actualizar")
+    @PutMapping("/actualizar")
     public String actualizarParadaCon(@RequestBody Ruta ruta){
         return rutaServicio.actualizarRuta(ruta);
     }

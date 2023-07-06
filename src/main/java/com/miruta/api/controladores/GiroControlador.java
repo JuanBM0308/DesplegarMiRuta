@@ -50,7 +50,7 @@ public class GiroControlador {
     }
 
     //Actualizar giro
-    @PostMapping("/actualizar")
+    @PutMapping("/actualizar")
     public String actualizarGiroCon(@RequestBody Giro giro){
         return giroServicio.actualizarGiro(giro);
     }

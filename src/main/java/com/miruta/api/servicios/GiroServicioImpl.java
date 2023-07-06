@@ -59,7 +59,7 @@ public class GiroServicioImpl implements InGiroServicio {
     //Metodo actualizar GIRO
     @Override
     public String actualizarGiro(Giro camgiro){
-        var respuesta = "{'respuesta' : 'No se realizo la actualizacion del Punto de giro'}";
+        String respuesta = "{'respuesta' : 'No se realizo la actualizacion del Punto de giro'}";
 
         Giro giro = giroDao.findById(camgiro.getIdGir())
                 .orElseThrow(() -> new NoSuchElementException("El punto de giro #" + camgiro.getIdGir() + " no existe en la base de datos"));

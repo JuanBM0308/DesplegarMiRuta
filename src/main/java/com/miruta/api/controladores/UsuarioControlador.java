@@ -63,7 +63,7 @@ public class UsuarioControlador {
 
 
     //Actualizar usuario
-    @PostMapping("/actualizar")
+    @PutMapping("/actualizar")
     public String actualizarUsuarioCon(@RequestBody Usuario usu){
         return usuarioServicio.actualizarUsuario(usu);
     }

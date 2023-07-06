@@ -86,7 +86,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
     // Metodo actualizar usuario
     @Override
     public String actualizarUsuario(Usuario usu){
-        var respuesta = "{'respuesta' : 'No se realizo la actualizacion del usuario'}";
+        String respuesta = "{'respuesta' : 'No se realizo la actualizacion del usuario'}";
 
         Usuario usuario = usuarioDao.findById(usu.getIdentificacionUsu())
                 .orElseThrow(() -> new NoSuchElementException("El usuario con identificación " + usu.getIdentificacionUsu() + " no existe en la base de datos"));

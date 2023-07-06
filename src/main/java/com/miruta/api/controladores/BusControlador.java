@@ -52,7 +52,7 @@ public class BusControlador {
 
 
     //Metodo actualizar localizacion del bus(longitudBus, latitudBus)
-    @PostMapping("/updateLocation")
+    @PutMapping("/updateLocation")
     public String actualizarLocalizacionBusCon(@RequestBody BusModelo busModelo) {
         return busServicio.actualizarLocalizacionBus(busModelo);
     }

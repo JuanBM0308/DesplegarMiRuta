@@ -59,7 +59,7 @@ public class ParadaControlador {
     }
 
     //Actualizar Parada
-    @PostMapping("/actualizar")
+    @PutMapping("/actualizar")
     public String actualizarParadaCon(@RequestBody Parada parada){
         return paradaServicio.actualizarParada(parada);
     }
