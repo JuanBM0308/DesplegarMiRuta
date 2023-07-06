@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Service
 public class GiroServicioImpl implements InGiroServicio {
@@ -55,6 +56,23 @@ public class GiroServicioImpl implements InGiroServicio {
         return respuesta;
     }
 
+    //Metodo actualizar GIRO
+    @Override
+    public String actualizarGiro(Giro camgiro){
+        var respuesta = "{'respuesta' : 'No se realizo la actualizacion del Punto de giro'}";
 
+        Giro giro = giroDao.findById(camgiro.getIdGir())
+                .orElseThrow(() -> new NoSuchElementException("El punto de giro #" + camgiro.getIdGir() + " no existe en la base de datos"));
 
+        if(camgiro.getIdGir() != null){
+            giro.setLatitudGir(giro.getLatitudGir());
+            giro.setLongitudGir(giro.getLongitudGir());
+
+            giroDao.save(giro);
+
+            respuesta = "{'respuesta' : 'Se realizo actualizacion del Punto de giro'}";
+        }
+
+        return respuesta;
+    }
 }

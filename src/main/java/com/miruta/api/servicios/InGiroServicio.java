@@ -24,4 +24,5 @@ public interface InGiroServicio {
     //Metodo eliminar giro
     String eliminarGiro(Long idGir);
 
+    String actualizarGiro(Giro camgiro);
 }

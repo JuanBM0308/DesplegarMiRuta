@@ -1,5 +1,6 @@
 package com.miruta.api.servicios;
 
+import com.miruta.api.entidades.Giro;
 import com.miruta.api.entidades.Ruta;
 import com.miruta.api.modelos.UsuarioHasRutaModelo;
 import java.util.List;
@@ -58,4 +59,7 @@ public interface InRutaServicio {
 
     //Obtener id de las rutas para un bus con la placa del bus
     List<Long> listaIdRutasBus(String placaBus);
+
+    //Actualizar ruta
+    String actualizarRuta(Ruta NueRuta);
 }

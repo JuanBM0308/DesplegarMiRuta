@@ -90,4 +90,10 @@ public class RutaControlador {
     public List<Ruta> listarRutas_BusCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
         return rutaServicio.listarRutas_Bus(identificacionUsu);
     }
+
+    //Actualizar Ruta
+    @PostMapping("/actualizar")
+    public String actualizarParadaCon(@RequestBody Ruta ruta){
+        return rutaServicio.actualizarRuta(ruta);
+    }
 }

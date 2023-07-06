@@ -1,6 +1,7 @@
 package com.miruta.api.controladores;
 
 import com.miruta.api.entidades.Giro;
+import com.miruta.api.entidades.Usuario;
 import com.miruta.api.servicios.GiroServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,12 @@ public class GiroControlador {
     @DeleteMapping("/eliminar/{idGir}")
     public String eliminarGiroCon(@PathVariable("idGir")Long idGir) {
         return giroServicio.eliminarGiro(idGir);
+    }
+
+    //Actualizar giro
+    @PostMapping("/actualizar")
+    public String actualizarGiroCon(@RequestBody Giro giro){
+        return giroServicio.actualizarGiro(giro);
     }
 
 }

@@ -10,9 +10,10 @@ import com.miruta.api.entidades.Parada;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
-public class ParadaServicioImpl implements InParadaServicio{
+public class ParadaServicioImpl implements InParadaServicio {
 
     //Objeto DAO(Repositorio) de parada
     @Autowired
@@ -23,7 +24,6 @@ public class ParadaServicioImpl implements InParadaServicio{
     InParadaHasRutaDao paradaHasRutaDao;
 
 
-
     //Metodo listar todas las paradas
     @Override
     public List<Parada> listarParadas() {
@@ -31,13 +31,11 @@ public class ParadaServicioImpl implements InParadaServicio{
     }
 
 
-
     //Metodo listar paradas por ruta
     @Override
     public List<Parada> listarParadas_ruta(Long idRut) {
         return paradaDao.findAllById(listaIdParadas(idRut));
     }
-
 
 
     //Metodo listar nombre de las paradas por ruta
@@ -53,14 +51,12 @@ public class ParadaServicioImpl implements InParadaServicio{
     }
 
 
-
     //Metodo guardar parada nueva
     @Override
     public String guardarParada(Parada parada) {
         paradaDao.save(parada);
         return "{'respuesta': 'Parada agregada con exito'}";
     }
-
 
 
     //Metodo eliminar parada
@@ -77,17 +73,12 @@ public class ParadaServicioImpl implements InParadaServicio{
     }
 
 
-
-
-
-
-
     //Obtener id de las paradas para una ruta
     @Override
     public List<Long> listaIdParadas(Long idRut) {
         List<Long> listaIdParada = new ArrayList<>();
 
-        for (ParadaHasRuta parHasRuta: paradaHasRutaDao.findAll()) {
+        for (ParadaHasRuta parHasRuta : paradaHasRutaDao.findAll()) {
             if (parHasRuta.getRutas().getIdRut().equals(idRut)) {
                 listaIdParada.add(parHasRuta.getParadas().getIdPar());
             }
@@ -96,6 +87,29 @@ public class ParadaServicioImpl implements InParadaServicio{
         return listaIdParada;
     }
 
+
+
+    //Actualizacion paradas
+    @Override
+    public String actualizarParada(Parada NueParada){
+        String respuesta = "{'respuesta' : 'No se realizo la actualizacion de la parada'}";
+
+        Parada parada = paradaDao.findById(NueParada.getIdPar())
+                .orElseThrow(() -> new NoSuchElementException("la parada #" + NueParada.getIdPar() + " no existe en la base de datos"));
+
+        if(NueParada.getIdPar() != null){
+            parada.setNombrePar(NueParada.getNombrePar());
+            parada.setDireccionPar(NueParada.getDireccionPar());
+            parada.setLatitudPar(NueParada.getLatitudPar());
+            parada.setLongitudPar(NueParada.getLongitudPar());
+            parada.setImgPar(NueParada.getImgPar());
+
+            paradaDao.save(parada);
+
+            respuesta = "{'respuesta' : 'Se realizo actualizacion de la parada'}";
+        }
+        return respuesta;
+    }
 
 
 }
