@@ -23,8 +23,8 @@ public interface InBusServicio {
 
 
 
-    //Metodo buscar bus por identificacionUsu
-    Optional<Bus> getBus(Long identificacionUsu);
+    //Metodo buscar bus por identificacionCon
+    Optional<Bus> getBus(Long identificacionCon);
 
 
 

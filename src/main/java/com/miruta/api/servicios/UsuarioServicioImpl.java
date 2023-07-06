@@ -2,6 +2,8 @@ package com.miruta.api.servicios;
 
 import com.miruta.api.modelos.UsuarioModeloLogin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.miruta.api.entidades.Usuario;
@@ -17,6 +19,10 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
     //Objeto DAO(Repositorio) de usuario
     @Autowired
     InUsuarioDao usuarioDao;
+
+    //Objeto mail para manejo de correos electronicos
+    @Autowired
+    JavaMailSender mailSender;
 
 
 
@@ -41,7 +47,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
             if (usuario.getContraseniaUsu().equals(usuarioModeloLogin.getContraseniaUsu())) {
                 respuesta = "{\n" +
                         "\"acceso\": true,\n" +
-                        "\"identifiacion\": "+ usuario.getIdentificacionUsu() + "\n" +
+                        "\"idUsu\": "+ usuario.getIdUsu() + "\n" +
                         "}";
             }
         }
@@ -53,20 +59,46 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
     //Metodo buscar usuario por identificacion
     @Override
-    public Optional<Usuario> getUsuario(Long identificacionUsu) {
-        return usuarioDao.findById(identificacionUsu);
+    public Optional<Usuario> getUsuario(Long idUsu) {
+        return usuarioDao.findById(idUsu);
     }
 
 
 
-    //Metodo agregar usuario
+    //Metodo comprobar usuario nuevo
     @Override
-    public String guardarUsuario(Usuario usuario) {
-        var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
-        if (!usuarioDao.existsById(usuario.getIdentificacionUsu())){
-            usuarioDao.save(usuario);
-            respuesta = "{'respuesta' : 'Se agrego un usuario'}";
+    public String comprobarUsuario(Usuario usuario) {
+        String respuesta;
+        Usuario usuarioCorreo = usuarioDao.findByCorreoUsu(usuario.getCorreoUsu()).orElse(null);
+
+        if (usuarioCorreo == null) {
+            respuesta = "{\n" +
+                    "\"permiso\": true,\n" +
+                    "";
+
+            int[] pines = new int[5];
+            pines[0] = (int)(Math.random() * 10);
+            pines[1] = (int)(Math.random() * 10);
+            pines[2] = (int)(Math.random() * 10);
+            pines[3] = (int)(Math.random() * 10);
+            pines[4] = (int)(Math.random() * 10);
+
+            respuesta += "\"pinUno\": "+pines[0]+",\n";
+            respuesta += "\"pinDos\": "+pines[1]+",\n";
+            respuesta += "\"pinTres\": "+pines[2]+",\n";
+            respuesta += "\"pinCuatro\": "+pines[3]+",\n";
+            respuesta += "\"pinCinco\": "+pines[4]+"\n";
+            respuesta += "}";
+
+            enviarEmail(pines, usuario);
+
+        } else {
+            respuesta = "{\n" +
+                    "\"permiso\": false,\n" +
+                    "\"mensaje\": 'Usuario con correo "+usuario.getCorreoUsu()+" ya existente'\n" +
+                    "}";
         }
+
         return respuesta;
     }
 
@@ -75,23 +107,26 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
     //Metodo eliminar usuario
     @Override
     public String eliminarUsuario(Long idUsu) {
-        var respuesta = "{'respuesta' : 'No se pudo eliminar usuario'}";
+        String respuesta = "{'respuesta' : 'Error eliminar usuario'}";
+
         if (usuarioDao.existsById(idUsu)){
             usuarioDao.deleteById(idUsu);
-            respuesta = "{'respuesta' : 'Eliminado exitosamente'}";
+            respuesta = "{'respuesta' : 'Usuario eliminado con exito'}";
         }
         return respuesta;
     }
+
+
 
     // Metodo actualizar usuario
     @Override
     public String actualizarUsuario(Usuario usu){
         String respuesta = "{'respuesta' : 'No se realizo la actualizacion del usuario'}";
 
-        Usuario usuario = usuarioDao.findById(usu.getIdentificacionUsu())
-                .orElseThrow(() -> new NoSuchElementException("El usuario con identificación " + usu.getIdentificacionUsu() + " no existe en la base de datos"));
+        Usuario usuario = usuarioDao.findById(usu.getIdUsu())
+                .orElseThrow(() -> new NoSuchElementException("El usuario con identificación " + usu.getIdUsu() + " no existe en la base de datos"));
 
-        if(usuario.getIdentificacionUsu() != null){
+        if(usuario.getIdUsu() != null){
             usuario.setCorreoUsu(usu.getCorreoUsu());
             usuario.setContraseniaUsu(usu.getContraseniaUsu());
             usuario.setNombreUsu(usu.getNombreUsu());
@@ -103,5 +138,40 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
         }
         
         return respuesta;
+    }
+
+
+
+    //Metodo guardar usuario nuevo
+    @Override
+    public String guardarUsuario(Usuario usuario) {
+        usuarioDao.save(usuario);
+        return "{\n" +
+                "\"registro\": true\n" +
+                "}";
+    }
+
+
+
+
+
+
+
+    //Metodo para enviar el email con los pines de comprobacion
+    private void enviarEmail(int[] pines, Usuario usuario) {
+        SimpleMailMessage emailMessage = new SimpleMailMessage();
+        String message = "Pin de comprobacion\n";
+
+        emailMessage.setFrom("miruta983@gmail.com");
+        emailMessage.setTo(usuario.getCorreoUsu());
+        emailMessage.setSubject("Comprobacion de correo electronico Mi Ruta");
+
+        for(int pin: pines) {
+            message += pin;
+        }
+
+        emailMessage.setText(message);
+
+        mailSender.send(emailMessage);
     }
 }

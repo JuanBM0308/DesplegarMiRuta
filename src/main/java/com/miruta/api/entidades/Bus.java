@@ -22,9 +22,9 @@ public class Bus implements Serializable {
     private Double latitudBus;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "identificacionUsu", referencedColumnName = "identificacionUsu", nullable = false)
+    @JoinColumn(name = "identificacionCon", referencedColumnName = "identificacionCon", nullable = false)
     @JsonIgnore
-    private Usuario usuario;
+    private Conductor conductor;
 
 
 
@@ -38,11 +38,11 @@ public class Bus implements Serializable {
     public Bus() {
     }
 
-    public Bus(String placaBus, Double longitudBus, Double latitudBus, Usuario usuario) {
+    public Bus(String placaBus, Double longitudBus, Double latitudBus, Conductor conductor) {
         this.placaBus = placaBus;
         this.longitudBus = longitudBus;
         this.latitudBus = latitudBus;
-        this.usuario = usuario;
+        this.conductor = conductor;
     }
 
 
@@ -60,8 +60,8 @@ public class Bus implements Serializable {
         return latitudBus;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Conductor getConductor() {
+        return conductor;
     }
 
     public Set<BusHasRuta> getBusHasRuta() {
@@ -83,8 +83,8 @@ public class Bus implements Serializable {
         this.latitudBus = latitudBus;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setConductor(Conductor conductor) {
+        this.conductor = conductor;
     }
 
     public void setBusHasRuta(Set<BusHasRuta> busHasRuta) {
@@ -100,7 +100,7 @@ public class Bus implements Serializable {
                 "placaBus='" + placaBus + '\'' +
                 ", longitudBus=" + longitudBus +
                 ", latitudBus=" + latitudBus +
-                ", usuario=" + usuario +
+                ", conductor=" + conductor +
                 ", busHasRuta=" + busHasRuta +
                 '}';
     }

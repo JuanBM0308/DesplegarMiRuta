@@ -2,9 +2,9 @@ package com.miruta.api.servicios;
 
 
 import com.miruta.api.entidades.Bus;
-import com.miruta.api.entidades.Usuario;
+import com.miruta.api.entidades.Conductor;
 import com.miruta.api.interfaces.InBusDao;
-import com.miruta.api.interfaces.InUsuarioDao;
+import com.miruta.api.interfaces.InConductorDao;
 import com.miruta.api.modelos.BusModelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +19,9 @@ public class BusesServiciolmpl implements InBusServicio {
     @Autowired
     InBusDao busDao;
 
-    //Objeto DAO(Repositorio) de usuario
+    //Objeto DAO(Repositorio) de conductor
     @Autowired
-    InUsuarioDao usuarioDao;
+    InConductorDao conductorDao;
 
 
 
@@ -39,26 +39,26 @@ public class BusesServiciolmpl implements InBusServicio {
         String respuesta = "{'respuesta': 'Error al Agregar bus'}";
 
         if (!busDao.existsById(busModelo.getPlacaBus())){
-            Usuario usuario = usuarioDao.findById(busModelo.getIdentificacionUsu()).orElse(null);
+            Conductor conductor = conductorDao.findById(busModelo.getIdentificacionCon()).orElse(null);
 
-            if (usuario != null) {
-                if (usuario.getTipoUsuario() == 2 && usuario.getBus() == null) {
+            if (conductor != null) {
+                if (conductor.getBus() == null) {
                     Bus bus = new Bus(
                             busModelo.getPlacaBus(),
                             busModelo.getLongitudBus(),
                             busModelo.getLatitudBus(),
-                            usuario
+                            conductor
                     );
 
                     busDao.save(bus);
                     respuesta = "{'respuesta': 'Bus agregado con exito'}";
 
                 } else {
-                    respuesta = "{'respuesta': 'Error al Agregar bus/usuario no es conductor o ya tiene asignado un bus'}";
+                    respuesta = "{'respuesta': 'Error al Agregar bus/conductor ya tiene asignado un bus'}";
                 }
 
             } else {
-                respuesta = "{'respuesta': 'Error al Agregar bus/usuario no existente'}";
+                respuesta = "{'respuesta': 'Error al Agregar bus/conductor no existente'}";
             }
         }
 
@@ -82,13 +82,13 @@ public class BusesServiciolmpl implements InBusServicio {
 
 
 
-    //Metodo buscar bus por identificacionUsu
+    //Metodo buscar bus por identificacionCon
     @Override
-    public Optional<Bus> getBus(Long identificacionUsu) {
-        Usuario usuario = usuarioDao.findById(identificacionUsu).orElse(null);
+    public Optional<Bus> getBus(Long identificacionCon) {
+        Conductor conductor = conductorDao.findById(identificacionCon).orElse(null);
 
-        if (usuario != null) {
-            return busDao.findByUsuario(usuario);
+        if (conductor != null) {
+            return busDao.findByConductor(conductor);
         }
 
         return Optional.empty();
@@ -102,26 +102,26 @@ public class BusesServiciolmpl implements InBusServicio {
         String respuesta = "{'respuesta': 'Error al actualizar ubicacion bus'}";
 
         if (busDao.existsById(busModelo.getPlacaBus())){
-            Usuario usuario = usuarioDao.findById(busModelo.getIdentificacionUsu()).orElse(null);
+            Conductor conductor = conductorDao.findById(busModelo.getIdentificacionCon()).orElse(null);
 
-            if (usuario != null) {
-                if (usuario.getTipoUsuario() == 2 && usuario.getBus() != null) {
+            if (conductor != null) {
+                if (conductor.getBus() != null) {
                     Bus bus = new Bus(
                             busModelo.getPlacaBus(),
                             busModelo.getLongitudBus(),
                             busModelo.getLatitudBus(),
-                            usuario
+                            conductor
                     );
 
                     busDao.save(bus);
                     respuesta = "{'respuesta': 'Localizacion bus actualizada con exito'}";
 
                 } else {
-                    respuesta = "{'respuesta': 'Error al actualizar ubicacion bus/usuario no es conductor o no tiene asignado un bus'}";
+                    respuesta = "{'respuesta': 'Error al actualizar ubicacion bus/conductor no tiene asignado un bus'}";
                 }
 
             } else {
-                respuesta = "{'respuesta': 'Error al actualizar ubicacion bus/usuario no existente'}";
+                respuesta = "{'respuesta': 'Error al actualizar ubicacion bus/conductor no existente'}";
             }
         }
 

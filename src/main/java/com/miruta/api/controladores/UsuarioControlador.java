@@ -39,9 +39,25 @@ public class UsuarioControlador {
 
 
     //Metodo buscar usuario por id
-    @GetMapping("/buscar/{identificacionUsu}")
-    public Optional<Usuario> getUsuarioCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
-        return usuarioServicio.getUsuario(identificacionUsu);
+    @GetMapping("/buscar/{idUsu}")
+    public Optional<Usuario> getUsuarioCon(@PathVariable("idUsu") Long idUsu) {
+        return usuarioServicio.getUsuario(idUsu);
+    }
+
+
+
+    //Metodo comprobar usuario nuevo
+    @PostMapping("/comprobar")
+    public String comprobarUsuarioCon(@RequestBody Usuario usuario) {
+        return usuarioServicio.comprobarUsuario(usuario);
+    }
+
+
+
+    //Metodo eliminar usuario
+    @DeleteMapping("/eliminar/{idUsu}")
+    public String eliminarUsuarioCon(@PathVariable("idUsu") Long idUsu) {
+        return usuarioServicio.eliminarUsuario(idUsu);
     }
 
 
@@ -50,14 +66,6 @@ public class UsuarioControlador {
     @PostMapping("/guardar")
     public String guardarUsuarioCon(@RequestBody Usuario usuario) {
         return usuarioServicio.guardarUsuario(usuario);
-    }
-
-
-
-    //Metodo eliminar usuario
-    @DeleteMapping("/eliminar/{identificacionUsu}")
-    public String eliminarUsuarioCon(@PathVariable("identificacionUsu") Long identificacionUsu) {
-        return usuarioServicio.eliminarUsuario(identificacionUsu);
     }
 
 
