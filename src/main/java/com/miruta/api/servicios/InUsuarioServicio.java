@@ -43,4 +43,15 @@ public interface InUsuarioServicio {
 
 
 
+
+
+
+
+    //Metodo para encriptar las contraseñas
+    String encryptContrasenia(String contraseniaUsu);
+
+
+
+    //Metodo para comprobar las contraseñas encriptadas
+    Boolean comprobarContrasenia(String contraseniaUsu, String contraseniaEncrypt);
 }

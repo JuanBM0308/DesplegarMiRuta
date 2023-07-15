@@ -41,4 +41,7 @@ public interface InParadaServicio {
 
     //Obtener id de las paradas para una ruta
     List<Long> listaIdParadas(Long idRut);
+
+
+
 }

@@ -13,6 +13,11 @@ public interface InBusServicio {
 
 
 
+    //Metodo listar buses por ruta
+    List<Bus> listarBus_ruta(Long idRut);
+
+
+
     //Metodo guardar bus nuevo
     String guardarBus(BusModelo busModelo);
 
@@ -30,5 +35,16 @@ public interface InBusServicio {
 
     //Metodo actualizar localizacion del bus(longitudBus, latitudBus)
     String actualizarLocalizacionBus(BusModelo busModelo);
+
+
+
+
+
+
+
+    //Obtener id de los buses para una ruta
+    List<String> listaPlacaBuses(Long idRut);
+
+
 
 }

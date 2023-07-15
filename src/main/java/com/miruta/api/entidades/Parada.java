@@ -28,7 +28,7 @@ public class Parada implements Serializable {
     @Column(nullable = false)
     private Double latitudPar;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String imgPar;
 
 

@@ -18,13 +18,13 @@ public class Usuario implements Serializable {
     @Column(length = 45, nullable = false)
     private String correoUsu;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 200, nullable = false)
     private String contraseniaUsu;
 
     @Column(length = 45, nullable = false)
     private String nombreUsu;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String fotoUsu;
 
     @Column(length = 2, nullable = false)

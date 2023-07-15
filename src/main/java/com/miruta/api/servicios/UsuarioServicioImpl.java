@@ -4,6 +4,9 @@ import com.miruta.api.modelos.UsuarioModeloLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.miruta.api.entidades.Usuario;
@@ -44,7 +47,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
         Usuario usuario = usuarioDao.findByCorreoUsu(usuarioModeloLogin.getCorreoUsu()).orElse(null);
 
         if (usuario != null) {
-            if (usuario.getContraseniaUsu().equals(usuarioModeloLogin.getContraseniaUsu())) {
+            if (comprobarContrasenia(usuarioModeloLogin.getContraseniaUsu(), usuario.getContraseniaUsu())) {
                 respuesta = "{\n" +
                         "\"acceso\": true,\n" +
                         "\"idUsu\": "+ usuario.getIdUsu() + "\n" +
@@ -123,8 +126,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
     public String actualizarUsuario(Usuario usu){
         String respuesta = "{'respuesta' : 'No se realizo la actualizacion del usuario'}";
 
-        Usuario usuario = usuarioDao.findById(usu.getIdUsu())
-                .orElseThrow(() -> new NoSuchElementException("El usuario con identificación " + usu.getIdUsu() + " no existe en la base de datos"));
+        Usuario usuario = usuarioDao.findById(usu.getIdUsu()).orElseThrow(() -> new NoSuchElementException("El usuario con identificación " + usu.getIdUsu() + " no existe en la base de datos"));
 
         if(usuario.getIdUsu() != null){
             usuario.setCorreoUsu(usu.getCorreoUsu());
@@ -145,6 +147,7 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
     //Metodo guardar usuario nuevo
     @Override
     public String guardarUsuario(Usuario usuario) {
+        usuario.setContraseniaUsu(encryptContrasenia(usuario.getContraseniaUsu()));
         usuarioDao.save(usuario);
         return "{\n" +
                 "\"registro\": true\n" +
@@ -177,4 +180,19 @@ public class UsuarioServicioImpl implements InUsuarioServicio{
 
 
 
+    //Metodo para encriptar las contraseñas
+    @Override
+    public String encryptContrasenia(String contraseniaUsu) {
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return passwordEncoder.encode(contraseniaUsu);
+    }
+
+
+
+    //Metodo para comprobar las contraseñas encriptadas
+    @Override
+    public Boolean comprobarContrasenia(String contraseniaUsu, String contraseniaEncrypt) {
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return passwordEncoder.matches(contraseniaUsu, contraseniaEncrypt);
+    }
 }

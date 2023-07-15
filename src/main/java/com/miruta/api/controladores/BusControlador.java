@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/bus")
 public class BusControlador {
 
@@ -23,6 +24,14 @@ public class BusControlador {
     @GetMapping("/listar")
     public List<Bus> listarBusCon(){
         return busServicio.listarBus();
+    }
+
+
+
+    //Metodo listar buses por ruta
+    @GetMapping("/listarRut/{idRut}")
+    public List<Bus> listarBus_rutaCon(@PathVariable("idRut") Long idRut) {
+        return busServicio.listarBus_ruta(idRut);
     }
 
 

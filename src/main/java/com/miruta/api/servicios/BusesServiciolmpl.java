@@ -2,13 +2,16 @@ package com.miruta.api.servicios;
 
 
 import com.miruta.api.entidades.Bus;
+import com.miruta.api.entidades.BusHasRuta;
 import com.miruta.api.entidades.Conductor;
 import com.miruta.api.interfaces.InBusDao;
+import com.miruta.api.interfaces.InBusHasRutaDao;
 import com.miruta.api.interfaces.InConductorDao;
 import com.miruta.api.modelos.BusModelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,12 +26,24 @@ public class BusesServiciolmpl implements InBusServicio {
     @Autowired
     InConductorDao conductorDao;
 
+    //Objeto DAO(Repositorio) de BusHasRuta
+    @Autowired
+    InBusHasRutaDao busHasRutaDao;
+
 
 
     //Metodo listar todos los buses
     @Override
     public List<Bus> listarBus() {
         return busDao.findAll();
+    }
+
+
+
+    //Metodo listar buses por ruta
+    @Override
+    public List<Bus> listarBus_ruta(Long idRut) {
+        return busDao.findAllById(listaPlacaBuses(idRut));
     }
 
 
@@ -126,6 +141,26 @@ public class BusesServiciolmpl implements InBusServicio {
         }
 
         return respuesta;
+    }
+
+
+
+
+
+
+
+    //Obtener id de los buses para una ruta
+    @Override
+    public List<String> listaPlacaBuses(Long idRut) {
+        List<String> listaPlacaBuses = new ArrayList<>();
+
+        for (BusHasRuta busHasRuta: busHasRutaDao.findAll()) {
+            if (busHasRuta.getRutas().getIdRut().equals(idRut)) {
+                listaPlacaBuses.add(busHasRuta.getBuses().getPlacaBus());
+            }
+        }
+
+        return listaPlacaBuses;
     }
 
 
