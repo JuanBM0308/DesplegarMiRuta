@@ -1,0 +1,20 @@
+[
+    {
+        "idUsu": 5,
+        "correoUsu": "Juan@gmail.com",
+        "contraseniaUsu": "contraseña5",
+        "nombreUsu": "JuanUsu",
+        "fotoUsu": "https://ath2.unileverservices.com/wp-content/",
+        "tipoUsuario": 2,
+        "usuarioHasRuta": [],
+        "conductor": {
+            "identificacionCon": 1078492759,
+            "bus": {
+                "placaBus": "xpu862",
+                "longitudBus": -74.22227559026138,
+                "latitudBus": 4.735193068654548,
+                "busHasRuta": []
+            }
+        }
+    }
+]

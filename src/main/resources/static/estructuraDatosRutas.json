@@ -1,0 +1,14 @@
+[
+    {
+        "idRut": 1,
+        "lugarInicioRut": "Las palmas",
+        "lugarDestinoRut": "Montanel",
+        "horaInicioRut": "04:20:00",
+        "horaFinalRut": "08:50:00",
+        "diasDisponiblesRut": "L/M/X/J/V",
+        "usuarioHasRuta": [],
+        "paradaHasRuta": [],
+        "busHasRuta": [],
+        "giroHasRuta": []
+    }
+]
